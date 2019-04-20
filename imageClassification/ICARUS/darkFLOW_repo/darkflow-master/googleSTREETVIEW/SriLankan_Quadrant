@@ -1,0 +1,7 @@
+#Enter NW corner of quadrant
+lat = 9.962211
+lng = 79.436732
+
+#Enter SE corner of quadrant
+lat_stop = 5.888902
+lng_stop = 81.992929
