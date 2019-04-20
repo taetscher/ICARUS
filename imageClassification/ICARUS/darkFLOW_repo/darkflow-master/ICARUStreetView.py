@@ -8,7 +8,7 @@ import numpy as np
 from darkflow.net.build import TFNet
 
 #setting up API key import from different folder
-with open('googleSTREETVIEW/APIkey.txt', 'r') as file:
+with open('icarustreetview_OUTPUT/APIkey.txt', 'r') as file:
   content = file.read()
   key = str(content)
   file.close()
@@ -18,12 +18,12 @@ start = datetime.now()
 
 #-----------------------SETTING PARAMETERS--------------------
 #Enter NW corner of quadrant
-lat = 6.988412
-lng = 79.817771
+lat = 9.962211
+lng = 79.436732
 
 #Enter SE corner of quadrant
-lat_stop = 5.887718
-lng_stop = 81.937033
+lat_stop = 5.888902
+lng_stop = 81.992929
 
 #specify step
 lat_step = 1
@@ -44,9 +44,9 @@ streetview_params = {"fov": fov,
 
 #savefile name:
 s_file = 'streets_' + str(datetime.now())[0:10] + '.csv'
-s_file_path = 'googleSTREETVIEW/' + str(s_file)
-assess_file_path = 'googleSTREETVIEW/assessed_' + str(datetime.now())[0:10] + '.csv'
-metadata_file_path = 'googleSTREETVIEW/metadata_' + str(datetime.now())[0:10] + '.txt'
+s_file_path = 'icarustreetview_OUTPUT/' + str(s_file)
+assess_file_path = 'icarustreetview_OUTPUT/assessed_' + str(datetime.now())[0:10] + '.csv'
+metadata_file_path = 'icarustreetview_OUTPUT/metadata_' + str(datetime.now())[0:10] + '.txt'
 
 #setting up csv headers to:
 with open(assess_file_path, 'a') as assess_file:
@@ -107,9 +107,9 @@ while i_stop < i:
         # Create a results object
         results = streetview.results(params)
         # Download images to directory 'downloads'
-        results.download_links('googleSTREETVIEW/temp')
+        results.download_links('icarustreetview_OUTPUT/temp')
 
-        j_file = open('googleSTREETVIEW/temp/metadata.json').read()
+        j_file = open('icarustreetview_OUTPUT/temp/metadata.json').read()
         metadata = json.loads(j_file)[0]
 
         status = metadata['status']
@@ -120,7 +120,7 @@ while i_stop < i:
 
             if status == 'OK':
                 print('metadata: OK')
-                picturepath = 'googleSTREETVIEW/temp/' + metadata['_file']
+                picturepath = 'icarustreetview_OUTPUT/temp/' + metadata['_file']
 
                 # read image date into cv2
                 imgcv = cv2.imread(picturepath)
@@ -176,6 +176,7 @@ with open(metadata_file_path, 'a') as meta:
     meta.write('\nBounding polygon (lat/long, lat_stop/long_stop: ' + str(lat) + ', ' + str(lng) + ', ' + str(lat_stop) + ', ' + str(lng_stop))
     meta.write('\nLat/Lng Step: ' + str(lat_step) + ', ' + str(lng_step))
     meta.write('\nStreetView API Parameters: ' + str(streetview_params))
+    meta.close()
 
 print('\n\n', '--' * 20)
 print('ICARUStreetView is done. time elapsed: {}, Points analysed: {}'.format(datetime.now()-start, n))
