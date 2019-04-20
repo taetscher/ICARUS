@@ -1,6 +1,5 @@
 from darkflow.net.build import TFNet
 import cv2
-
 import json
 from tweepy import Stream
 from tweepy import OAuthHandler
