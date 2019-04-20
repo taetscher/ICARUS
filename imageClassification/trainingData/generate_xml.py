@@ -1,7 +1,6 @@
 # from https://github.com/markjay4k/YOLO-series/blob/master/part7%20-%20generate_xml.py
 """This file is used in conjunction with draw_boxes.py, it serves as an import root file"""
 
-
 import os
 import cv2
 from lxml import etree

@@ -16,7 +16,7 @@ batch = 0
 batch_size = 200
 stop = 0
 
-#test for cd fullTrainingDataset/batch1
+#set up first batch subfolder batch1
 os.mkdir("fullTrainingDataset/batch" + str(batch + 1))
 
 print("BatchBoi2000 initializing...")
@@ -24,11 +24,11 @@ print("BatchBoi2000 begin...")
 print("__"*10)
 print("BatchBoi2000 running at full speed")
 
-while stop <= len(file_list):
+for number in range(0, len(file_list)):
     photo_name = str(file_list[n+m])
     file_path = folder + photo_name
 
-    #show image onscreen
+    # load image
     image = cv2.imread(file_path)
 
     #scaling folder number
@@ -42,11 +42,13 @@ while stop <= len(file_list):
 
     if n == batch_size:
         batch += 1
-        print("batch ", batch, " abgeschlossen")
+        print("batch ", batch, " finished")
         n = 0
-        m += 10
+        m += batch_size
         os.mkdir("fullTrainingDataset/batch" + str(batch + 1))
         print("folder for batch " + str(batch + 1)+ " created")
+
+
 
 end = datetime.now()
 time_elapsed = end - begin

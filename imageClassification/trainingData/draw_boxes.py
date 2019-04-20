@@ -6,7 +6,10 @@ import matplotlib.pyplot as plt
 import cv2
 from matplotlib.widgets import RectangleSelector
 from generate_xml import write_xml
+from datetime import datetime
 
+
+start = datetime.now()
 
 # global constants
 img = None
@@ -14,10 +17,43 @@ tl_list = []
 br_list = []
 object_list = []
 
-# constants
+
 
 # set batch number folder here!
-image_folder = 'images'
+# log:
+# Batch 1 [x]
+# Batch 2 []
+# Batch 3 []
+# Batch 4 []
+# Batch 5 []
+# Batch 6 []
+# Batch 7 []
+# Batch 8 []
+# Batch 9 []
+# Batch 10 []
+# Batch 11 []
+# Batch 12 []
+# Batch 13 []
+# Batch 14 []
+# Batch 15 []
+# Batch 16 []
+# Batch 17 []
+# Batch 18 []
+# Batch 19 []
+# Batch 20 []
+# Batch 21 []
+# Batch 22 []
+# Batch 23 []
+# Batch 24 []
+# Batch 25 []
+# Batch 26 []
+# Batch 27 []
+
+
+
+batch = 2
+
+image_folder = 'fullTrainingDataset/batch{}'.format(str(batch))
 savedir = 'annotations'
 obj = 'all_Season_Road'
 
@@ -70,3 +106,5 @@ if __name__ == '__main__':
         plt.tight_layout()
         plt.show()
         plt.close(fig)
+stop = datetime.now()
+print("program finished, time elapsed: ", stop-start)
