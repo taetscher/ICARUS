@@ -67,4 +67,8 @@ twitterStream/
 
 venv_MT/
 
-imageClassification/trainingData/
+imageClassification/trainingData/annotations
+
+imageClassification/trainingData/images
+
+imageClassification/trainingData/fullTrainingDataset
