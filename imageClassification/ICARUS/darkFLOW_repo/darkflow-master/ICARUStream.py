@@ -42,7 +42,7 @@ geo_media_tweet = r'icarustream_OUTPUT/georefMediaTweets.csv'
 # write new section into output csv file
 with open(geo_media_tweet, 'a') as gmt:
     # header = 'Indicator for new Run, timestamp, yolo parameters'
-    gmt.write("\n\n\n\n{}{}\n".format("NEW RUN -------------------------\n",datetime.now()))
+    gmt.write("\n\n\n\n{}{}\n".format("NEW RUN -------------------------\n",datetime.now()q))
     gmt.write("{}{}".format("header = 'coord_x, coord_y, link, timestamp, UUID'\n","---------------------------------\n\n"))
     gmt.close()
 

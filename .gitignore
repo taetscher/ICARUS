@@ -39,6 +39,10 @@ imageClassification/ICARUS/darkFLOW_repo/darkflow-master/test/
 
 imageClassification/ICARUS/darkFLOW_repo/darkflow-master/test_model_data/
 
+imageClassification/ICARUS/darkFLOW_repo/darkflow-master/icarustreetview_OUTPUT/*
+imageClassification/ICARUS/darkFLOW_repo/darkflow-master/icarustream_OUTPUT/*
+
+
 QGIS/
 
 test\.py

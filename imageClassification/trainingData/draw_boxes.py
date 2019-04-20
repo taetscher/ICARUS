@@ -19,41 +19,13 @@ object_list = []
 
 
 
-# set batch number folder here!
-# log:
-# Batch 1 [x]
-# Batch 2 []
-# Batch 3 []
-# Batch 4 []
-# Batch 5 []
-# Batch 6 []
-# Batch 7 []
-# Batch 8 []
-# Batch 9 []
-# Batch 10 []
-# Batch 11 []
-# Batch 12 []
-# Batch 13 []
-# Batch 14 []
-# Batch 15 []
-# Batch 16 []
-# Batch 17 []
-# Batch 18 []
-# Batch 19 []
-# Batch 20 []
-# Batch 21 []
-# Batch 22 []
-# Batch 23 []
-# Batch 24 []
-# Batch 25 []
-# Batch 26 []
-# Batch 27 []
 
 
-
+# See manhours.txt for information on what batch is next!
 batch = 2
-
+input("Just to let you know, last time you were working on batch {}. Continue with classification by pressing any key.".format(batch))
 image_folder = 'fullTrainingDataset/batch{}'.format(str(batch))
+
 savedir = 'annotations'
 obj = 'all_Season_Road'
 
@@ -107,4 +79,7 @@ if __name__ == '__main__':
         plt.show()
         plt.close(fig)
 stop = datetime.now()
+with open('manhours.txt', 'a') as logger:
+    logger.write("Manhours used for batch {}: {}\n".format(batch, stop-start))
+    logger.close()
 print("program finished, time elapsed: ", stop-start)
