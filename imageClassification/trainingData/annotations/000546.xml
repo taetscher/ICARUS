@@ -1,0 +1,22 @@
+<annotation>
+  <folder>fullTrainingDataset/batch3</folder>
+  <filename>000546.jpg</filename>
+  <segmented>0</segmented>
+  <size>
+    <width>900</width>
+    <height>1200</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>all_Season_Road</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>562</xmin>
+      <ymin>813</ymin>
+      <xmax>891</xmax>
+      <ymax>1129</ymax>
+    </bndbox>
+  </object>
+</annotation>
