@@ -2,6 +2,7 @@ from darkflow.net.build import TFNet
 import cv2
 import os
 from datetime import datetime
+import numpy as np
 
 t = 0
 detect = 0
@@ -9,6 +10,7 @@ start = datetime.now()
 
 img_folder = "icarusVALIDATION/validationImages/validation/"
 file_list = os.listdir(img_folder)
+confidence_list = []
 
 
 
@@ -17,6 +19,7 @@ options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 21000, "threshold": 0.5}
 tfnet = TFNet(options)
 
 print("Running validation of ICARUS...")
+
 #running validation
 for number in range(0, len(file_list)):
     photo_name = str(file_list[t])
@@ -30,29 +33,29 @@ for number in range(0, len(file_list)):
     result = tfnet.return_predict(imgcv)
 
     if len(result) > 0:
-        print("this would have been saved\n")
         detect += 1
+
+        # get confidence and append to confidence list for statistics
+        a = range(0, len(result))
+        for element in a:
+            confidence = result[element]['confidence']
+            confidence_list.append(confidence)
 
 
     else:
-        # elso continue to the next tweet
-        print('No Detection\n')
+        # if ICARUS did not find anything, continue to the next image
         pass
-
-
-
-
 
     # outputs a list of dictionaries, each dictionary representing a detected object
     #print(result)
 
     t += 1
 
-
 # perpare validation statistics
 stop = datetime.now()
 n = len(file_list)
 percentage = 100*(detect/n)
+avr_confidence = np.mean(confidence_list)
 
 # save validation statistics
 with open("icarusVALIDATION/validationStatistics.txt",'a') as logger:
@@ -60,19 +63,18 @@ with open("icarusVALIDATION/validationStatistics.txt",'a') as logger:
     logger.write("\nNEW RUN at {}\n".format(datetime.now()))
     logger.write("-" * 90)
     logger.write("\nTesting Dataset: {}\n".format(img_folder))
-    logger.write("-" * 62)
+    logger.write("-" * (17 + len(img_folder)))
     logger.write("\nICARUS running with the following options")
-    logger.write("\nOptions: {}".format(options))
+    logger.write("\nYOLO-Options: {}".format(options))
     logger.write("\nImages assessed: {}".format(n))
     logger.write("\nAllSeasonRoads detected: {}, as percentage: {}%".format(detect,percentage))
+    logger.write("\nAverage confidence probability: {}".format(avr_confidence))
     logger.write("\nDuration: [HH:MM:SS.MS] {}\n".format(stop-start))
     logger.write("-" * 90)
     logger.write("\n\n\n")
     logger.close()
 
-print("Validation of ICARUS finished, check icarusVALIDATION/validationStatistics.txt for results")
-print("length image folder path", len(img_folder))
-
+print("\n\nValidation of ICARUS finished, check icarusVALIDATION/validationStatistics.txt for results")
 
 
 
