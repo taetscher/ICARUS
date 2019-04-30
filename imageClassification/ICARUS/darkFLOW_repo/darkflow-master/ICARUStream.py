@@ -36,8 +36,8 @@ tfnet = TFNet(options)
 print('---------' * 10)
 
 # mapping (output) savefiles
-mapping_file_path = r'icarustream_OUTPUT/icarustreamOUTPUT.csv'
-geo_media_tweet = r'icarustream_OUTPUT/georefMediaTweets.csv'
+mapping_file_path = r'icarustreamOUTPUT/icarustreamOUTPUT.csv'
+geo_media_tweet = r'icarustreamOUTPUT/georefMediaTweets.csv'
 
 # write new section into output csv file
 with open(geo_media_tweet, 'a') as gmt:

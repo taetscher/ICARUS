@@ -8,7 +8,7 @@ import numpy as np
 from darkflow.net.build import TFNet
 
 #setting up API key import from different folder
-with open('icarustreetview_OUTPUT/APIkey.txt', 'r') as file:
+with open('icarustreetviewOUTPUT/APIkey.txt', 'r') as file:
   content = file.read()
   key = str(content)
   file.close()
@@ -44,9 +44,9 @@ streetview_params = {"fov": fov,
 
 #savefile name:
 s_file = 'streets_' + str(datetime.now())[0:10] + '.csv'
-s_file_path = 'icarustreetview_OUTPUT/' + str(s_file)
-assess_file_path = 'icarustreetview_OUTPUT/assessed_' + str(datetime.now())[0:10] + '.csv'
-metadata_file_path = 'icarustreetview_OUTPUT/metadata_' + str(datetime.now())[0:10] + '.txt'
+s_file_path = 'icarustreetviewOUTPUT/' + str(s_file)
+assess_file_path = 'icarustreetviewOUTPUT/assessed_' + str(datetime.now())[0:10] + '.csv'
+metadata_file_path = 'icarustreetviewOUTPUT/metadata_' + str(datetime.now())[0:10] + '.txt'
 
 #setting up csv headers to:
 with open(assess_file_path, 'a') as assess_file:
@@ -107,9 +107,9 @@ while i_stop < i:
         # Create a results object
         results = streetview.results(params)
         # Download images to directory 'downloads'
-        results.download_links('icarustreetview_OUTPUT/temp')
+        results.download_links('icarustreetviewOUTPUT/temp')
 
-        j_file = open('icarustreetview_OUTPUT/temp/metadata.json').read()
+        j_file = open('icarustreetviewOUTPUT/temp/metadata.json').read()
         metadata = json.loads(j_file)[0]
 
         status = metadata['status']
@@ -120,7 +120,7 @@ while i_stop < i:
 
             if status == 'OK':
                 print('metadata: OK')
-                picturepath = 'icarustreetview_OUTPUT/temp/' + metadata['_file']
+                picturepath = 'icarustreetviewOUTPUT/temp/' + metadata['_file']
 
                 # read image date into cv2
                 imgcv = cv2.imread(picturepath)
