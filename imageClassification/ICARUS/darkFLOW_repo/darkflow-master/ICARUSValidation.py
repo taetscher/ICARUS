@@ -15,7 +15,7 @@ confidence_list = []
 
 
 #setting up YOLO
-options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 21000, "threshold": 0.5}
+options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 20000, "threshold": 0.5}
 tfnet = TFNet(options)
 
 print("Running validation of ICARUS...")
@@ -66,7 +66,7 @@ with open("icarusVALIDATION/validationStatistics.txt",'a') as logger:
     logger.write("-" * (17 + len(img_folder)))
     logger.write("\nICARUS running with the following options")
     logger.write("\nYOLO-Options: {}".format(options))
-    logger.write("\nImages assessed: {}".format(n))
+    logger.write("\nNumber of Images assessed: {}".format(n))
     logger.write("\nAllSeasonRoads detected: {}, as percentage: {}%".format(detect,percentage))
     logger.write("\nAverage confidence probability: {}".format(avr_confidence))
     logger.write("\nDuration: [HH:MM:SS.MS] {}\n".format(stop-start))

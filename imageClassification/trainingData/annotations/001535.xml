@@ -1,0 +1,10 @@
+<annotation>
+  <folder>fullTrainingDataset/batch8</folder>
+  <filename>001535.jpg</filename>
+  <segmented>0</segmented>
+  <size>
+    <width>640</width>
+    <height>640</height>
+    <depth>3</depth>
+  </size>
+</annotation>

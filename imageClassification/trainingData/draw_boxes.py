@@ -9,20 +9,16 @@ from generate_xml import write_xml
 from datetime import datetime
 
 
-start = datetime.now()
-
 # global constants
 img = None
 tl_list = []
 br_list = []
 object_list = []
-
-
-
+start = datetime.now()
 
 
 # See manhours.txt for information on what batch is next!
-batch = 7
+batch = 8
 input("Just to let you know, last time you were working on batch {}.\nIf you are unsure about where to continue, check manhours.txt.\n Continue with classification by pressing enter.".format(batch))
 image_folder = 'fullTrainingDataset/batch{}'.format(str(batch))
 
