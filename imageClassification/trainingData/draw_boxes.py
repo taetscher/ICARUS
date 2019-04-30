@@ -22,8 +22,8 @@ object_list = []
 
 
 # See manhours.txt for information on what batch is next!
-batch = 2
-input("Just to let you know, last time you were working on batch {}. Continue with classification by pressing any key.".format(batch))
+batch = 7
+input("Just to let you know, last time you were working on batch {}.\nIf you are unsure about where to continue, check manhours.txt.\n Continue with classification by pressing enter.".format(batch))
 image_folder = 'fullTrainingDataset/batch{}'.format(str(batch))
 
 savedir = 'annotations'
@@ -64,6 +64,7 @@ if __name__ == '__main__':
         image = cv2.imread(image_file.path)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         ax.imshow(image)
+        plt.title(str(n)+"/200")
 
         #draw the actual box onscreen
         toggle_selector.RS = RectangleSelector(
@@ -78,8 +79,10 @@ if __name__ == '__main__':
         plt.tight_layout()
         plt.show()
         plt.close(fig)
+
 stop = datetime.now()
+
 with open('manhours.txt', 'a') as logger:
-    logger.write("Manhours used for batch {}: {}\n".format(batch, stop-start))
+    logger.write("Manhours used for batch {}; {}\n".format(batch, stop-start))
     logger.close()
 print("program finished, time elapsed: ", stop-start)
