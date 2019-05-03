@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 import requests
 from datetime import datetime
+import smtplib
+import ssl
 
 
 #---------------------------------------------------------
@@ -59,9 +61,14 @@ n1 = 0
 n2 = 0
 found = 0
 start = datetime.now()
+gmail_account = "taetschericarus@gmail.com"
+password = eval(open("gmail_credentials.txt").read())
+reciever_accounts = ["beni.schuepbach@hispeed.ch", "auteblauwau@hotmail.com"]
 
 # infile setup
-in_file = "twitterstreamRASPBERRY/georefMediaTweets.txt"
+in_path = "twitterstreamRASPBERRY/"
+raspi_file = "georefMediaTweets.txt"
+in_file = in_path + raspi_file
 now = str(datetime.now())[:10]
 
 
@@ -74,8 +81,15 @@ with open(in_file) as infile:
         line = infile.readline()
 
 #calculate approximate time to finish task
-app_time = n1*0.5/60/60
-print("infile contains {} links to images. It will take approximately {} hours for ICARUS to assess all images.\n(Calculation based on approximately 2 Images/s)\n".format(n1,app_time))
+app_time = n1*0.75/60/60
+print("Infile contains {} links to images. It will take approximately {} hours for ICARUS to assess all images.\n(Calculation based on approximately 1.5 Images/s)\n".format(n1,app_time))
+
+#get info for sending email when ICARUS is done
+print("-"*30, "\n")
+print("ICARUS will send an email to {} when its done.\n".format(reciever_accounts))
+print("-"*30)
+
+
 print("ICARUS Initiated\n")
 
 with open(in_file) as fp:
@@ -96,41 +110,57 @@ with open(in_file) as fp:
 
             print(str(medurl))
 
-            # download image
-            img_data = requests.get(medurl).content
-            temp_name = 'temp_img'
-            with open('images/temp/' + temp_name, 'wb') as handler:
-                # save image data from URL
-                handler.write(img_data)
-                handler.close()
+            # download image, if this fails, go with next one
+            try:
+                img_data = requests.get(medurl).content
+                temp_name = 'temp_img'
 
-            # pass image to yolo
-            imgcv = cv2.imread('images/temp/' + temp_name)
+                with open('images/temp/' + temp_name, 'wb') as handler:
+                    # save image data from URL
+                    handler.write(img_data)
+                    handler.close()
 
-            # assess image with yolo
-            result = tfnet.return_predict(imgcv)
+                # pass image to yolo
+                imgcv = cv2.imread('images/temp/' + temp_name)
 
-            if len(result) > 0:
-                found += 1
+                # assess image with yolo
+                result = tfnet.return_predict(imgcv)
 
-                # prepare yolo output to be saved in csv
-                a = range(0, len(result))
-                confidence_list = []
-                for element in a:
-                    confidence = result[element]['confidence']
-                    confidence_list.append(confidence)
+                # count how many images were actually assessed
+                n2 += 1
 
-                avr_confidence = np.mean(confidence_list)
+                if len(result) > 0:
+                    # count how many AllSeasonRoads were predicted
+                    found += 1
 
-                # basically, if anything was detected (if any all_Season_Roads were found), save data
-                with open("icarusOUTPUT/icarus{}.csv".format(now), 'a') as outfile:
-                    outfile.write("{}, {}, {}, {}, {}, {}\n".format(coord_x, coord_y, medurl, timestamp, avr_confidence, result))
+                    # prepare yolo output to be saved in csv
+                    a = range(0, len(result))
+                    confidence_list = []
+                    for element in a:
+                        confidence = result[element]['confidence']
+                        confidence_list.append(confidence)
 
-            else:
-                # elso continue to the next tweet
+                    avr_confidence = np.mean(confidence_list)
+
+                    # basically, if anything was detected (if any all_Season_Roads were found), save data
+                    with open("icarusOUTPUT/{}.csv".format(raspi_file[:-4]), 'a') as outfile:
+                        outfile.write(
+                            "{}, {}, {}, {}, {}, {}\n".format(coord_x, coord_y, medurl, timestamp, avr_confidence,
+                                                              result))
+
+
+                else:
+                    # elso continue to the next tweet
+                    pass
+
+                print(result)
+
+            #if any of the above fail, pass and continue with next one.
+            except:
+                print("Error occured, proceeding to next entry.")
                 pass
 
-            print(result)
+
 
 
 
@@ -144,13 +174,14 @@ with open(in_file) as fp:
         # go to next line
         line = fp.readline()
 
-        n2 += 1
+
+        print("assessing image {}/{}".format(n2,n1))
 
 #prepare to save metadata of run
 stop = datetime.now()
 percentage = 100*(found/n2)
 
-with open("icarusOUTPUT/MetaData.txt") as logger:
+with open("icarusOUTPUT/MetaData.txt", 'a') as logger:
     logger.write("-" * 90)
     logger.write("\nNEW RUN at {}\n".format(start))
     logger.write("-" * 90)
@@ -160,10 +191,31 @@ with open("icarusOUTPUT/MetaData.txt") as logger:
     logger.write("\nYOLO-Options: {}".format(options))
     logger.write("\nNumber of Images assessed: {}".format(n2))
     logger.write("\nAllSeasonRoads detected: {}, as percentage: {}%".format(found, percentage))
-    logger.write("\nDuration: [HH:MM:SS.MS] {}\n".format(stop - start))
+    logger.write("\nDuration: [HH:MM:SS.MS] {}".format(stop - start))
+    logger.write("\nConfirmation Email sent from {} to: {}\n".format(gmail_account,reciever_accounts))
     logger.write("-" * 90)
     logger.write("\n\n\n")
     logger.close()
 
+print("Statistics of run saved...")
 
+#set up email to send
+port = 465  # For SSL
+smtp_server = "smtp.gmail.com"
+message = """ICARUS finished run at {}\n{}\nRan on: {}\nNumber of Images Assessed: {}\nAllSeasonRoads detected: {}\nDuration: {}\n\n""".format(str(start)[:10], "-"*33 ,in_file, n1, found, stop-start)
+
+
+context = ssl.create_default_context()
+
+for account in reciever_accounts:
+    print("Sending confirmation Email to {}".format(account))
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(gmail_account, password)
+        server.sendmail(gmail_account, account, message)
+
+
+
+
+print("-"*30)
+print("\nEmail notification sent to {}".format(reciever_accounts))
 print("See icarusOUTPUT/MetaData.txt for statistics of run.")
