@@ -63,11 +63,13 @@ found = 0
 start = datetime.now()
 gmail_account = "taetschericarus@gmail.com"
 password = eval(open("gmail_credentials.txt").read())
-reciever_accounts = ["beni.schuepbach@hispeed.ch", "auteblauwau@hotmail.com"]
+
+# add or remove accounts that should recieve an email when ICARUS is done
+reciever_accounts = ["beni.schuepbach@hispeed.ch", "auteblauwau@hotmail.com", "christoph.schuepbach@swissonline.ch"]
 
 # infile setup
 in_path = "twitterstreamRASPBERRY/"
-raspi_file = "georefMediaTweets.txt"
+raspi_file = "georefMediaTweets2019-05-03.txt"
 in_file = in_path + raspi_file
 now = str(datetime.now())[:10]
 
@@ -145,7 +147,7 @@ with open(in_file) as fp:
                     # basically, if anything was detected (if any all_Season_Roads were found), save data
                     with open("icarusOUTPUT/{}.csv".format(raspi_file[:-4]), 'a') as outfile:
                         outfile.write(
-                            "{}, {}, {}, {}, {}, {}\n".format(coord_x, coord_y, medurl, timestamp, avr_confidence,
+                            "{}; {}; {}; {}; {}; {}\n".format(coord_x, coord_y, medurl, timestamp, avr_confidence,
                                                               result))
 
 
