@@ -9,7 +9,7 @@ import ssl
 
 #---------------------------------------------------------
 """
-ICARUS (Image Classification Application for Road Utility Status)
+ICARUS1 (Image Classification Application for Road Utility Status)
 
 This program provides an algorithm to determine the presence/status
 of roads in digital images.
@@ -32,7 +32,7 @@ Computer Science Department of the University of Berne
 
 
 
-ICARUS was authored by
+ICARUS1 was authored by
 
 Benjamin Schuepbach
 benjamin.schuepbach@students.unibe.ch
@@ -56,7 +56,10 @@ this is a dictionary that sets up yolo.
 options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 21000, "threshold": 0.5, "gpu": 1}
 tfnet = TFNet(options)
 
+
+
 # global variables
+icarus_version = 1
 n1 = 0
 n2 = 0
 found = 0
@@ -64,8 +67,13 @@ start = datetime.now()
 gmail_account = "taetschericarus@gmail.com"
 password = eval(open("gmail_credentials.txt").read())
 
+# let user know that they should watch out which icarus version they use
+print("ICARUS Running with following options parameters:\n")
+print(options)
+input("\nPlease be aware that you are using savefile directory for ICARUS version {}. If this is not correct, exit immediately. Continue by pressing the Enter key.\n".format(icarus_version))
+
 # add or remove accounts that should recieve an email when ICARUS is done
-reciever_accounts = ["beni.schuepbach@hispeed.ch", "auteblauwau@hotmail.com", "christoph.schuepbach@swissonline.ch"]
+reciever_accounts = ["beni.schuepbach@hispeed.ch", "auteblauwau@hotmail.com", "ch.schuepbach@swissonline.ch"]
 
 # infile setup
 in_path = "twitterstreamRASPBERRY/"
@@ -145,7 +153,7 @@ with open(in_file) as fp:
                     avr_confidence = np.mean(confidence_list)
 
                     # basically, if anything was detected (if any all_Season_Roads were found), save data
-                    with open("icarusOUTPUT/{}.csv".format(raspi_file[:-4]), 'a') as outfile:
+                    with open("icarusOUTPUT/ICARUS{}/{}.csv".format(icarus_version, raspi_file[:-4]), 'a') as outfile:
                         outfile.write(
                             "{}; {}; {}; {}; {}; {}\n".format(coord_x, coord_y, medurl, timestamp, avr_confidence,
                                                               result))
@@ -187,9 +195,9 @@ with open("icarusOUTPUT/MetaData.txt", 'a') as logger:
     logger.write("-" * 90)
     logger.write("\nNEW RUN at {}\n".format(start))
     logger.write("-" * 90)
-    logger.write("\nRan ICARUS on: {}\n".format(in_file))
+    logger.write("\nRan ICARUS1 on: {}\n".format(in_file))
     logger.write("-" * (17 + len(in_file)))
-    logger.write("\nICARUS running with the following options")
+    logger.write("\nICARUS1 running with the following options")
     logger.write("\nYOLO-Options: {}".format(options))
     logger.write("\nNumber of Images assessed: {}".format(n2))
     logger.write("\nAllSeasonRoads detected: {}, as percentage: {}%".format(found, percentage))
@@ -204,7 +212,7 @@ print("Statistics of run saved...")
 #set up email to send
 port = 465  # For SSL
 smtp_server = "smtp.gmail.com"
-message = """ICARUS finished run at {}\n{}\nRan on: {}\nNumber of Images Assessed: {}\nAllSeasonRoads detected: {}\nDuration: {}\n\n""".format(str(start)[:10], "-"*33 ,in_file, n1, found, stop-start)
+message = """ICARUS1 finished run at {}\n{}\nRan on: {}\nNumber of Images Assessed: {}\nAllSeasonRoads detected: {}\nDuration: {}\n\n""".format(str(start)[:10], "-"*33 ,in_file, n1, found, stop-start)
 
 
 context = ssl.create_default_context()
