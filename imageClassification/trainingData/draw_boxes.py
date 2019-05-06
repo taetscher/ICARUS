@@ -18,8 +18,8 @@ start = datetime.now()
 
 
 # See manhours.txt for information on what batch is next!
-batch = 8
-input("Just to let you know, last time you were working on batch {}.\nIf you are unsure about where to continue, check manhours.txt.\n Continue with classification by pressing enter.".format(batch))
+batch = 9
+input("Just to let you know, this will run on batch {}.\nIf you are unsure about where to continue, check manhours.txt.\n Continue with classification by pressing enter.".format(batch))
 image_folder = 'fullTrainingDataset/batch{}'.format(str(batch))
 
 savedir = 'annotations'
@@ -72,7 +72,9 @@ if __name__ == '__main__':
 
         bbox = plt.connect('key_press_event', toggle_selector)
         key = plt.connect('key_press_event', onkeypress)
-        plt.tight_layout()
+        mng = plt.get_current_fig_manager()
+        mng.window.state('zoomed')
+        #plt.tight_layout()
         plt.show()
         plt.close(fig)
 
