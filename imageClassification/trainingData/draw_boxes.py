@@ -18,7 +18,7 @@ start = datetime.now()
 
 
 # See manhours.txt for information on what batch is next!
-batch = 21
+batch = 22
 input("Just to let you know, this will run on batch {}.\nIf you are unsure about where to continue, check manhours.txt.\n Continue with classification by pressing enter.".format(batch))
 image_folder = 'fullTrainingDataset/batch{}'.format(str(batch))
 
@@ -60,7 +60,7 @@ if __name__ == '__main__':
         image = cv2.imread(image_file.path)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         ax.imshow(image)
-        plt.title(str(n)+"/200")
+        plt.title(str(n+1)+"/200")
 
         #draw the actual box onscreen
         toggle_selector.RS = RectangleSelector(
