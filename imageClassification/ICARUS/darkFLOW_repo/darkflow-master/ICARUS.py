@@ -50,10 +50,10 @@ this is a dictionary that sets up yolo.
 [model] is a parameter that specifies which model to use like folder/model.cfg
 [load] is used to load predefined weights like bin/weights.weights
 [threshold] specifies the minimal confidence factor yolo needs to draw a bounding box
-[gpu] specifies wether yolo should run on cpu or gpu - keep in mind for running on gpu you'll need additional software by nvidia
+[gpu] specifies whether yolo should run on cpu or gpu - keep in mind for running on gpu you'll need additional software by nvidia
 '''
 #yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 21000, "threshold": 0.5, "gpu": 1}
+options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 21000, "threshold": 0.5, "gpu": 0.8}
 tfnet = TFNet(options)
 
 
@@ -62,6 +62,7 @@ tfnet = TFNet(options)
 icarus_version = 1
 n1 = 0
 n2 = 0
+l = 0
 found = 0
 start = datetime.now()
 gmail_account = "taetschericarus@gmail.com"
@@ -70,29 +71,38 @@ password = eval(open("gmail_credentials.txt").read())
 # let user know that they should watch out which icarus version they use
 print("ICARUS Running with following options parameters:\n")
 print(options)
-input("\nPlease be aware that you are using savefile directory for ICARUS version {}. If this is not correct, exit immediately. Continue by pressing the Enter key.\n".format(icarus_version))
+input("\nPlease be aware that you are using savefile directory for ICARUS version {}. If this is not correct, exit immediately. Continue [Y/n]?.\n".format(icarus_version))
 
 # add or remove accounts that should recieve an email when ICARUS is done
 reciever_accounts = ["beni.schuepbach@hispeed.ch", "auteblauwau@hotmail.com", "ch.schuepbach@swissonline.ch"]
 
 # infile setup
 in_path = "twitterstreamRASPBERRY/"
-raspi_file = "georefMediaTweets2019-05-03.txt"
+raspi_file = "CONSOLIDATED_georefMediaTweets.txt"
 in_file = in_path + raspi_file
 now = str(datetime.now())[:10]
 
 
 # check how many images are to be processed
+print("Calculating time ICARUS will need...")
 with open(in_file) as infile:
     line = infile.readline()
 
     while line:
-        n1 += 1
-        line = infile.readline()
+        if l >50000:
+            l = 0
+            print("...")
+
+        else:
+            n1 += 1
+            line = infile.readline()
+            l += 1
+
+
 
 #calculate approximate time to finish task
-app_time = n1*0.75/60/60
-print("Infile contains {} links to images. It will take approximately {} hours for ICARUS to assess all images.\n(Calculation based on approximately 1.5 Images/s)\n".format(n1,app_time))
+app_time = n1*0.5/60/60
+print("Infile contains {} links to images. It will take approximately {} hours for ICARUS to assess all images.\n(Calculation based on approximately 2 Images/s)\n".format(n1,app_time))
 
 #get info for sending email when ICARUS is done
 print("-"*30, "\n")
@@ -104,7 +114,6 @@ print("ICARUS Initiated\n")
 
 with open(in_file) as fp:
     line = fp.readline()
-
 
     while line:
         try:
@@ -123,7 +132,7 @@ with open(in_file) as fp:
             # download image, if this fails, go with next one
             try:
                 img_data = requests.get(medurl).content
-                temp_name = 'temp_img'
+                temp_name = 'temp_img.jpg'
 
                 with open('images/temp/' + temp_name, 'wb') as handler:
                     # save image data from URL
