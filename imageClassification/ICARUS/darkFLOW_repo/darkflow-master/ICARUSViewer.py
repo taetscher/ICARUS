@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import requests
 
-"""This Program can be used to visually verfy results of ICARUS, inspired by Mark Jay"""
+"""This Program can be used to visually verify results of ICARUS, inspired by Mark Jay"""
 
 # Set up and prepare infile read
 folder_path = "icarusOUTPUT/ICARUS1/"
@@ -10,7 +10,7 @@ infile_name = "georefMediaTweets2019-05-03.csv"
 in_file = folder_path + infile_name
 
 # set up threshold for conficence
-tresh = 0.65
+tresh = 0.8
 
 #Viewer magic
 with open(in_file) as fp:

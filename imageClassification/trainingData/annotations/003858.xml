@@ -1,0 +1,34 @@
+<annotation>
+  <folder>fullTrainingDataset/batch20</folder>
+  <filename>003858.jpg</filename>
+  <segmented>0</segmented>
+  <size>
+    <width>900</width>
+    <height>1200</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>all_Season_Road</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>153</xmin>
+      <ymin>221</ymin>
+      <xmax>189</xmax>
+      <ymax>284</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>all_Season_Road</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>76</xmin>
+      <ymin>227</ymin>
+      <xmax>126</xmax>
+      <ymax>275</ymax>
+    </bndbox>
+  </object>
+</annotation>
