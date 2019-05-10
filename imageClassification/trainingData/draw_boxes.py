@@ -18,7 +18,7 @@ start = datetime.now()
 
 
 # See manhours.txt for information on what batch is next!
-batch = 18
+batch = 19
 input("Just to let you know, this will run on batch {}.\nIf you are unsure about where to continue, check manhours.txt.\n Continue with classification by pressing enter.".format(batch))
 image_folder = 'fullTrainingDataset/batch{}'.format(str(batch))
 
