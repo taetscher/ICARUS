@@ -10,7 +10,7 @@ infile_name = "georefMediaTweets2019-05-03.csv"
 in_file = folder_path + infile_name
 
 # set up threshold for conficence
-tresh = 0.8
+tresh = 0.73
 
 #Viewer magic
 with open(in_file) as fp:

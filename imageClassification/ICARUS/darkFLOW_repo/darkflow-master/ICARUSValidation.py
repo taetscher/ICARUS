@@ -8,6 +8,7 @@ t = 0
 detect = 0
 start = datetime.now()
 
+# choose validation data here (give folder path, where inside the folder images are saved as .jpg)
 img_folder = "icarusVALIDATION/validationImages/validation/"
 file_list = os.listdir(img_folder)
 confidence_list = []

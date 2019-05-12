@@ -53,7 +53,7 @@ this is a dictionary that sets up yolo.
 [gpu] specifies whether yolo should run on cpu or gpu - keep in mind for running on gpu you'll need additional software by nvidia
 '''
 #yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 21000, "threshold": 0.5, "gpu": 0.8}
+options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 21000, "threshold": 0.5, "gpu": 0.6}
 tfnet = TFNet(options)
 
 
@@ -97,8 +97,6 @@ with open(in_file) as infile:
             n1 += 1
             line = infile.readline()
             l += 1
-
-
 
 #calculate approximate time to finish task
 app_time = n1*0.5/60/60
