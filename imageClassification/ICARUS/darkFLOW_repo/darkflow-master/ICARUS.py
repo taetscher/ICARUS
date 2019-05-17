@@ -53,13 +53,13 @@ this is a dictionary that sets up yolo.
 [gpu] specifies whether yolo should run on cpu or gpu - keep in mind for running on gpu you'll need additional software by nvidia
 '''
 #yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 21000, "threshold": 0.5, "gpu": 0.6}
+options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 68750, "threshold": 0.5, "gpu": 0.75}
 tfnet = TFNet(options)
 
 
 
 # global variables
-icarus_version = 1
+icarus_version = 2
 n1 = 0
 n2 = 0
 l = 0
@@ -202,9 +202,9 @@ with open("icarusOUTPUT/MetaData.txt", 'a') as logger:
     logger.write("-" * 90)
     logger.write("\nNEW RUN at {}\n".format(start))
     logger.write("-" * 90)
-    logger.write("\nRan ICARUS1 on: {}\n".format(in_file))
+    logger.write("\nRan ICARUS{} on: {}\n".format(icarus_version, in_file))
     logger.write("-" * (17 + len(in_file)))
-    logger.write("\nICARUS1 running with the following options")
+    logger.write("\nICARUS{} running with the following options".format(icarus_version))
     logger.write("\nYOLO-Options: {}".format(options))
     logger.write("\nNumber of Images assessed: {}".format(n2))
     logger.write("\nAllSeasonRoads detected: {}, as percentage: {}%".format(found, percentage))
