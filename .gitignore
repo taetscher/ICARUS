@@ -75,3 +75,5 @@ venv_MT/
 imageClassification/trainingData/images
 
 imageClassification/trainingData/fullTrainingDataset
+
+imageClassification/ICARUS/darkFLOW_repo/darkflow-master/training/annotations/

@@ -53,7 +53,7 @@ this is a dictionary that sets up yolo.
 [gpu] specifies whether yolo should run on cpu or gpu - keep in mind for running on gpu you'll need additional software by nvidia
 '''
 #yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 68750, "threshold": 0.5, "gpu": 0.75}
+options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 96500, "threshold": 0.5, "gpu": 0.5}
 tfnet = TFNet(options)
 
 
@@ -67,11 +67,6 @@ found = 0
 start = datetime.now()
 gmail_account = "taetschericarus@gmail.com"
 password = eval(open("gmail_credentials.txt").read())
-
-# let user know that they should watch out which icarus version they use
-print("ICARUS Running with following options parameters:\n")
-print(options)
-input("\nPlease be aware that you are using savefile directory for ICARUS version {}. If this is not correct, exit immediately. Continue [Y/n]?.\n".format(icarus_version))
 
 # add or remove accounts that should recieve an email when ICARUS is done
 reciever_accounts = ["beni.schuepbach@hispeed.ch", "auteblauwau@hotmail.com", "ch.schuepbach@swissonline.ch"]
@@ -107,7 +102,10 @@ print("-"*30, "\n")
 print("ICARUS will send an email to {} when its done.\n".format(reciever_accounts))
 print("-"*30)
 
-
+# let user know that they should watch out which icarus version they use
+print("ICARUS Running with following options parameters:\n")
+print(options)
+input("\nPlease be aware that you are using savefile directory for ICARUS version {}. If this is not correct, exit immediately. Continue [Y/n]?.\n".format(icarus_version))
 print("ICARUS Initiated\n")
 
 with open(in_file) as fp:
@@ -129,7 +127,7 @@ with open(in_file) as fp:
 
             # download image, if this fails, go with next one
             try:
-                img_data = requests.get(medurl).content
+                img_data = requests.get(medurl, timeout=1).content
                 temp_name = 'temp_img.jpg'
 
                 with open('images/temp/' + temp_name, 'wb') as handler:

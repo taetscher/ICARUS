@@ -47,13 +47,22 @@ University of Bern (Switzerland).
 #### Twitter API Access
 #### Google Street View API Access
 #### Trained YOLO Weights
-Currently, the top performing .ckpt files are:
+Here is a list of the currently top performing checkpoints from training.
+Their success is measured as percentage of ASR detections on a validation dataset:
 
 - 52500
-- **57500**
-- **64500**
+- 57500
+- 64500 (55%)
 - 65250
 - 68750
+- 80750 (60.5%, med. conf: 0.58)
+- 82500 (59%)
+- 84250 (55%)
+- 86250 (57%)
+- 88500 (57%, med. conf: 0.6)
+- **94500** (59%, med. conf: 0.61)
+- **96500** (64%, med. conf: 0.6)
+
 
 If you want to use some version of ICARUS yourself, leave me a message here on GitHub and ask me to send you a .ckpt file. I will gladly do so.
 

@@ -10,10 +10,11 @@ icarus_version = 2
 folder_path = "icarusOUTPUT/ICARUS{}/".format(icarus_version)
 infile_name = "CONSOLIDATED_georefMediaTweets.csv"
 in_file = folder_path + infile_name
+t = 0
 
 print(in_file)
 # set up threshold for conficence
-tresh = 0.7
+tresh = 0.78
 
 #Viewer magic
 with open(in_file) as fp:
@@ -106,24 +107,19 @@ with open(in_file) as fp:
                         # draw label
                         img = cv2.putText(img, label, label_tl, fontface, fontscale, font_color, thickness)
 
-                    # make plt show the image fullscreen
-                    mng = plt.get_current_fig_manager()
-                    mng.window.state('zoomed')
-                    plt.imshow(img)
-                    plt.show()
+
+                    #save the image with annotation for easy looking looking
+                    plt.imsave("icarusaverOUTPUT/{}.jpg".format(t), img)
+                    print("Saving Image... {}".format(t))
+                    t += 1
 
                 except:
                     #print("fail2")
                     pass
 
-
-
             else:
                 #print("fail3")
                 pass
-
-
-
 
         except:
             #print("fail4")

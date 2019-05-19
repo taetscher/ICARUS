@@ -16,13 +16,13 @@ confidence_list = []
 
 
 #setting up YOLO
-options = {"model": "cfg/tiny-yolo-ICARUS.cfg", "load": 21000, "threshold": 0.7, 'gpu': 1}
+options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 97750, "threshold": 0.5, 'gpu': 0.75}
 tfnet = TFNet(options)
 
 print("Running validation of ICARUS...")
 
 #running validation
-for number in range(0, len(file_list)):
+for number in file_list:
     photo_name = str(file_list[t])
     file_path = img_folder + photo_name
     print("Assessing: ", file_path[-10:])
