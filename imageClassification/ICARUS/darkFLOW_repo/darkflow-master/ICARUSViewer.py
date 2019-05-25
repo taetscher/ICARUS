@@ -8,7 +8,7 @@ icarus_version = 2
 
 # Set up and prepare infile read
 folder_path = "icarusOUTPUT/ICARUS{}/".format(icarus_version)
-infile_name = "CONSOLIDATED_georefMediaTweets.csv"
+infile_name = "output.csv"
 in_file = folder_path + infile_name
 
 print(in_file)

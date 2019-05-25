@@ -36,23 +36,31 @@ ICARUS was implemented by
 
 
 ## About ICARUS 
-This program provides an algorithm to determine the presence
-of all-season roads in digital images. It is currently a work in progress.
+ICARUS, as the name so adequatly describes, is an image classification algorithm that detects all-season Roads in digital images.
+
+EXPLAIN CONNECTION TO SUSTAINABILITY AND METAPHOR OF ICARUS HIMSELF WHO FLEW TOO CLOSE TO THE SUN
+
 
 ICARUS is part of a masters thesis at the Institute of Geography of the
 University of Bern (Switzerland). 
+
+ICARUS is currently a work in progress.
 
 ## How to set up ICARUS
 ### Requirements & Setup
 #### Twitter API Access
 #### Google Street View API Access
 #### Trained YOLO Weights
-Here is a list of the currently top performing checkpoints from training.
+Here is a list of the currently top performing checkpoints from training. The best performing checkpoint is highlighted in bold.
 Their success is measured as percentage of ASR detections on a validation dataset:
 
-- **94500** (59%, med. conf: 0.61)
-- **96500** (64%, med. conf: 0.6)
+
+- 94500 (59%, med. conf: 0.61)
+- 96500 (64%, med. conf: 0.6)
 - **105000** (72%, med conf: 0.6)
+- 108000 (71%, med conf: 0.61)
+- 110000 (69%, med conf: 0.6)
+- 113250 (65%, med conf: 0.61)
 
 
 If you want to use some version of ICARUS yourself, leave me a message here on GitHub and ask me to send you a .ckpt file. I will gladly do so.
@@ -61,10 +69,6 @@ If you want to use some version of ICARUS yourself, leave me a message here on G
 
 
 ## How to ICARUS
-ICARUS, as the name so adequatly describes, is an image classification algorithm that detects all-season Roads in digital images.
-
-EXPLAIN CONNECTION TO SUSTAINABILITY AND METAPHOR OF ICARUS HIMSELF WHO FLEW TOO CLOSE TO THE SUN
-
 ICARUS is based on tiny-yolo-voc, which is cause of a few undesirable effects:
 
 - the performance of the algorithm is not optimal

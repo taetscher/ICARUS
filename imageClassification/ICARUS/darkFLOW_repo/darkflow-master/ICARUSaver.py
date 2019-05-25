@@ -8,13 +8,13 @@ icarus_version = 2
 
 # Set up and prepare infile read
 folder_path = "icarusOUTPUT/ICARUS{}/".format(icarus_version)
-infile_name = "CONSOLIDATED_georefMediaTweets.csv"
+infile_name = "output.csv"
 in_file = folder_path + infile_name
 t = 0
 
 print(in_file)
 # set up threshold for conficence
-tresh = 0.78
+tresh = 0.7
 
 #Viewer magic
 with open(in_file) as fp:

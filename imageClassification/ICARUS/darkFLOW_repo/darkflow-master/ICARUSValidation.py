@@ -16,7 +16,7 @@ confidence_list = []
 
 
 #setting up YOLO
-options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 107500, "threshold": 0.5, 'gpu': 0.75}
+options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 114250, "threshold": 0.5, 'gpu': 0.75}
 tfnet = TFNet(options)
 
 print("Running validation of ICARUS...")

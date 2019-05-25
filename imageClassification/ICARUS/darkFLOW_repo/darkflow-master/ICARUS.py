@@ -51,6 +51,7 @@ this is a dictionary that sets up yolo.
 [threshold] specifies the minimal confidence factor yolo needs to draw a bounding box
 [gpu] specifies whether yolo should run on cpu or gpu - keep in mind for running on gpu you'll need additional software by nvidia
 '''
+print("Setting up yolo...")
 #yolo setup
 options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 105000, "threshold": 0.5, "gpu": 0.5}
 tfnet = TFNet(options)
@@ -150,7 +151,7 @@ for file in harvests:
                     n2 += 1
 
                     if len(result) > 0:
-                        # count how many AllSeasonRoads were predicted
+                        # count for how many images AllSeasonRoads were predicted
                         found += 1
 
                         # prepare yolo output to be saved in csv
