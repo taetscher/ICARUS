@@ -4,19 +4,21 @@ import os
 from datetime import datetime
 import numpy as np
 
+# set up global variables
 t = 0
 detect = 0
 start = datetime.now()
+confidence_list = []
 
 # choose validation data here (give folder path, where inside the folder images are saved as .jpg)
 img_folder = "icarusVALIDATION/validationImages/validation/"
 file_list = os.listdir(img_folder)
-confidence_list = []
+
 
 
 
 #setting up YOLO
-options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 114250, "threshold": 0.5, 'gpu': 0.75}
+options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 142750, "threshold": 0.5, 'gpu': 0.75}
 tfnet = TFNet(options)
 
 print("Running validation of ICARUS...")

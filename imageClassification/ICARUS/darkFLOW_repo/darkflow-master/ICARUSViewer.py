@@ -13,7 +13,7 @@ in_file = folder_path + infile_name
 
 print(in_file)
 # set up threshold for conficence
-tresh = 0.7
+tresh = 0.5
 
 #Viewer magic
 with open(in_file) as fp:

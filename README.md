@@ -58,9 +58,20 @@ Their success is measured as percentage of ASR detections on a validation datase
 - 94500 (59%, med. conf: 0.61)
 - 96500 (64%, med. conf: 0.6)
 - **105000** (72%, med conf: 0.6)
-- 108000 (71%, med conf: 0.61)
+- **108000** (71%, med conf: 0.61)
 - 110000 (69%, med conf: 0.6)
 - 113250 (65%, med conf: 0.61)
+- 131250 (62%, med conf: 0.62)
+- 133250 (69%, med conf: 0.6)
+- 135500 (68.5%, med conf: 0.59)
+- **136750** (72.5%, med conf: 0.59)
+
+ICARUS was trained using the tiny-yolo-voc.cfg file from [pjreddie.com](https://pjreddie.com/darknet/yolo/).
+It was trained using the following command:
+`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.75 --load -1 --batch 8 --json`
+
+At first I trained it with a batch size of 8 and 4 subdivisions. After stagnating in training I moved to batch size of 8 and 0 subdivisions.
+My hardware setup coulnd't handle more than batch size 8 for some reason.
 
 
 If you want to use some version of ICARUS yourself, leave me a message here on GitHub and ask me to send you a .ckpt file. I will gladly do so.

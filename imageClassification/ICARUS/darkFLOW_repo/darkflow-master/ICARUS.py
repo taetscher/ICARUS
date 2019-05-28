@@ -53,12 +53,13 @@ this is a dictionary that sets up yolo.
 '''
 print("Setting up yolo...")
 #yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 105000, "threshold": 0.5, "gpu": 0.5}
+options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 132750, "threshold": 0.5, "gpu": 0.5}
 tfnet = TFNet(options)
 
 
 
 # global variables
+err = 0
 icarus_version = 2
 n1 = 0
 n2 = 0
@@ -179,6 +180,7 @@ for file in harvests:
                 # if any of the above fail, pass and continue with next one.
                 except:
                     print("Error occured, proceeding to next entry.")
+                    err += 1
                     pass
 
 
@@ -188,6 +190,7 @@ for file in harvests:
             except AssertionError:
                 # this catches errors of type 'image is not of type np.ndarray'
                 print("numpy fucked up")
+                err += 1
                 pass
 
             # go to next line
@@ -210,6 +213,7 @@ with open("icarusOUTPUT/MetaData.txt", 'a') as logger:
     logger.write("\nYOLO-Options: {}".format(options))
     logger.write("\nNumber of Images assessed: {}".format(n2))
     logger.write("\nAllSeasonRoads detected: {}, as percentage: {}%".format(found, percentage))
+    logger.write("\nErrors occured during assessments: {}".format(err))
     logger.write("\nDuration: [HH:MM:SS.MS] {}".format(stop - start))
     logger.write("\nConfirmation Email sent from {} to: {}\n".format(gmail_account,reciever_accounts))
     logger.write("-" * 90)
