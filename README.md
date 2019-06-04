@@ -57,21 +57,30 @@ Their success is measured as percentage of ASR detections on a validation datase
 
 - 94500 (59%, med. conf: 0.61)
 - 96500 (64%, med. conf: 0.6)
-- **105000** (72%, med conf: 0.6)
-- **108000** (71%, med conf: 0.61)
+- 105000 (72%, med conf: 0.6)
+- 108000 (71%, med conf: 0.61)
 - 110000 (69%, med conf: 0.6)
 - 113250 (65%, med conf: 0.61)
 - 131250 (62%, med conf: 0.62)
 - 133250 (69%, med conf: 0.6)
 - 135500 (68.5%, med conf: 0.59)
-- **136750** (72.5%, med conf: 0.59)
+- 136750 (72.5%, med conf: 0.59)
+- 187500 (66%, med conf: 0.63)
+- 256000 (66%, med conf: 0.64)
+- 258750 (73.5%, med conf: 0.61)
+- 321950 (59.5%, med conf: 0.64)
+- 344150 (71%, med conf: 0.62)
+- 344750 (68.5%, med conf: 0.63)
+- **357450** (80%, med conf: 0.61)
+
 
 ICARUS was trained using the tiny-yolo-voc.cfg file from [pjreddie.com](https://pjreddie.com/darknet/yolo/).
-It was trained using the following command:
-`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.75 --load -1 --batch 8 --json`
+It was trained using the following commands:
+`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load -1 --batch 10`
 
 At first I trained it with a batch size of 8 and 4 subdivisions. After stagnating in training I moved to batch size of 8 and 0 subdivisions.
-My hardware setup coulnd't handle more than batch size 8 for some reason.
+In the third stage I moved batch size up to 10, which saw ICARUS improve a lot. When training stagnates, it sometimes is helpful to increase batch size incrementally.
+My hardware setup coulnd't handle more than batch size 10 for some reason.
 
 
 If you want to use some version of ICARUS yourself, leave me a message here on GitHub and ask me to send you a .ckpt file. I will gladly do so.
