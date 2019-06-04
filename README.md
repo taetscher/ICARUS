@@ -35,7 +35,7 @@ ICARUS was implemented by
 ----
 
 
-## About ICARUS 
+## ABOUT ICARUS 
 ICARUS, as the name so adequatly describes, is an image classification algorithm that detects all-season Roads in digital images.
 
 EXPLAIN CONNECTION TO SUSTAINABILITY AND METAPHOR OF ICARUS HIMSELF WHO FLEW TOO CLOSE TO THE SUN
@@ -46,11 +46,11 @@ University of Bern (Switzerland).
 
 ICARUS is currently a work in progress.
 
-## How to set up ICARUS
+## ICARUS SETUP
 ### Requirements & Setup
 #### Twitter API Access
 #### Google Street View API Access
-#### Trained YOLO Weights
+#### Training ICARUS
 Here is a list of the currently top performing checkpoints from training. The best performing checkpoint is highlighted in bold.
 Their success is measured as percentage of ASR detections on a validation dataset:
 
@@ -82,13 +82,16 @@ At first I trained it with a batch size of 8 and 4 subdivisions. After stagnatin
 In the third stage I moved batch size up to 10, which saw ICARUS improve a lot. When training stagnates, it sometimes is helpful to increase batch size incrementally.
 My hardware setup coulnd't handle more than batch size 10 for some reason.
 
+From step number 361756 onward, I switched from the standard "rmsprop" optimizer to the "sgd" (stochastic gradient descent) optimizer.
+This was an experimental move, because I had issues with random "nan" values for loss and moving average loss.
+
 
 If you want to use some version of ICARUS yourself, leave me a message here on GitHub and ask me to send you a .ckpt file. I will gladly do so.
 
 ---
 
 
-## How to ICARUS
+## HOW TO ICARUS
 ICARUS is based on tiny-yolo-voc, which is cause of a few undesirable effects:
 
 - the performance of the algorithm is not optimal
@@ -148,7 +151,7 @@ quickly check what ICARUS is outputting.
 
 ----
 
-## Acknowledgements
+## ACKNOWLEDGEMENTS
 
 True to the scientific method, this project would not have been possible without being able to
 'stand on the shoulders of giants'. Many of the components used were already available freely.
@@ -165,6 +168,6 @@ Most notably inspiration came from...
 ----
 
 
-## Thank You!
+## THANKS
 Special thanks go to everyone who helped me along the way. In particular to my mentors who helped
 me achieve my ambitious goals. Furthermore I owe a very special thank you to Melanie.
