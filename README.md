@@ -54,7 +54,7 @@ ICARUS is currently a work in progress.
 Here is a list of the currently top performing checkpoints from training. The best performing checkpoint is highlighted in bold.
 Their success is measured as percentage of ASR detections on a validation dataset:
 
-######RMSPROP standard (with tweaks in learning rate whenever loss plateaus were hit)
+RMSPROP standard (with tweaks in learning rate whenever loss plateaus were hit)
 - 94500 (59%, med. conf: 0.61)
 - 96500 (64%, med. conf: 0.6)
 - 105000 (72%, med conf: 0.6)
@@ -73,10 +73,10 @@ Their success is measured as percentage of ASR detections on a validation datase
 - 344750 (68.5%, med conf: 0.63)
 - **357450** (80%, med conf: 0.61)
 
-######RMSPROP testing (with --momentum 0.9 and --lr 0.00008)
+RMSPROP testing (with --momentum 0.9 and --lr 0.00008)
 - **362050** (74.5%, med conf: 0.88, however also pretty error-prone)
 
-######ADAM
+ADAM
 - asdf
 
 
