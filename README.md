@@ -54,7 +54,7 @@ ICARUS is currently a work in progress.
 Here is a list of the currently top performing checkpoints from training. The best performing checkpoint is highlighted in bold.
 Their success is measured as percentage of ASR detections on a validation dataset:
 
-
+######RMSPROP standard (with tweaks in learning rate whenever loss plateaus were hit)
 - 94500 (59%, med. conf: 0.61)
 - 96500 (64%, med. conf: 0.6)
 - 105000 (72%, med conf: 0.6)
@@ -73,17 +73,34 @@ Their success is measured as percentage of ASR detections on a validation datase
 - 344750 (68.5%, med conf: 0.63)
 - **357450** (80%, med conf: 0.61)
 
+######RMSPROP testing (with --momentum 0.9 and --lr 0.00008)
+- **362050** (74.5%, med conf: 0.88, however also pretty error-prone)
+
+######ADAM
+- asdf
+
 
 ICARUS was trained using the tiny-yolo-voc.cfg file from [pjreddie.com](https://pjreddie.com/darknet/yolo/).
-It was trained using the following commands:
+It was trained using the RMSPROP Optimizer and the following commands:
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load -1 --batch 10`
 
 At first I trained it with a batch size of 8 and 4 subdivisions. After stagnating in training I moved to batch size of 8 and 0 subdivisions.
 In the third stage I moved batch size up to 10, which saw ICARUS improve a lot. When training stagnates, it sometimes is helpful to increase batch size incrementally.
 My hardware setup coulnd't handle more than batch size 10 for some reason.
 
-From step number 361756 onward, I switched from the standard "rmsprop" optimizer to the "sgd" (stochastic gradient descent) optimizer.
-This was an experimental move, because I had issues with random "nan" values for loss and moving average loss.
+Whenever a plateau of moving ave loss was hit or whenever random "nan" values would show up, I would lower the learning rate and 
+continue training this way.
+
+A second version of ICARUSv2 was trained, using the ADAM Optimizer
+`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer adam --load -1`
+
+To log the values for training with the ADAM Optimizer, I changed flow.py in `/darkflow/net` as follows.  
+  
+        with open("training_stats.csv", 'a') as logger:
+            logger.write("{}, {}, {}{}".format(step_now, loss, loss_mva, "\n"))
+            logger.close()
+            
+ This now writes a csv file in the root directory of `/darkflow`
 
 
 If you want to use some version of ICARUS yourself, leave me a message here on GitHub and ask me to send you a .ckpt file. I will gladly do so.

@@ -14,7 +14,7 @@ t = 0
 
 print(in_file)
 # set up threshold for conficence
-tresh = 0.7
+tresh = 0.9
 
 #Viewer magic
 with open(in_file) as fp:

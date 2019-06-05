@@ -53,7 +53,7 @@ this is a dictionary that sets up yolo.
 '''
 print("Setting up yolo...")
 #yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 344150, "threshold": 0.5, "gpu": 0.9}
+options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 362050, "threshold": 0.5, "gpu": 0.9}
 tfnet = TFNet(options)
 
 

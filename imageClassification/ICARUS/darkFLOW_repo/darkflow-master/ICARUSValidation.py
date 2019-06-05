@@ -18,7 +18,7 @@ file_list = os.listdir(img_folder)
 
 
 #setting up YOLO
-options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 362050, "threshold": 0.5, 'gpu': 0.75}
+options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 360150, "threshold": 0.5, 'gpu': 0.75}
 tfnet = TFNet(options)
 
 print("Running validation of ICARUS...")
