@@ -38,7 +38,7 @@ def plotAssessment():
     plt.scatter(data.keys(), data.values(), color=colors["black"], marker=".")
 
     # label the figure
-    plt.title("Detections with ICARUSv{},\nthreshold set at{}".format(icarus_version, thresh))
+    plt.title("Detections with ICARUSv{},\nthreshold set at {}".format(icarus_version, thresh))
     plt.xlabel("Date")
     plt.ylabel("Detections")
 
@@ -117,4 +117,4 @@ def plotHarvests():
     plt.show()
 
 
-plotHarvests()
+plotAssessment()
