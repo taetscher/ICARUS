@@ -53,7 +53,7 @@ this is a dictionary that sets up yolo.
 '''
 print("Setting up yolo...")
 #yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 362050, "threshold": 0.5, "gpu": 0.9}
+options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 362850, "threshold": 0.5, "gpu": 0.9}
 tfnet = TFNet(options)
 
 
@@ -148,9 +148,6 @@ for file in harvests:
                     # assess image with yolo
                     result = tfnet.return_predict(imgcv)
 
-                    # count how many images were actually assessed
-                    n2 += 1
-
                     if len(result) > 0:
                         # count for how many images AllSeasonRoads were predicted
                         found += 1
@@ -169,6 +166,9 @@ for file in harvests:
                             outfile.write(
                                 "{}; {}; {}; {}; {}; {}\n".format(coord_x, coord_y, medurl, timestamp, avr_confidence,
                                                                   result))
+
+                        # count how many images were actually assessed
+                        n2 += 1
 
 
                     else:

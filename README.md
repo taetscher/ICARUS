@@ -166,6 +166,10 @@ run to a seperate ouptut file (validationStatistics.txt).
 ICARUSViewer works just like ICARUSaver. But instead of saving output files, they are directly displayed on screen. This functionality can be useful if you just want to
 quickly check what ICARUS is outputting.
 
+
+### PLOTTiBoi  
+PLOTTiBoi was written to visualize the results of this thesis.
+
 ----
 
 ## ACKNOWLEDGEMENTS
