@@ -84,7 +84,6 @@ def plotDetection():
     plt.savefig("Plots/detections.png")
     plt.show()
 
-
 def plotHarvests():
     """Plots Input data (number of tweets saved)"""
 
@@ -154,7 +153,6 @@ def plotHarvests():
     plt.savefig("Plots/harvests.png")
     plt.show()
 
-
 def plotLearning():
     """Plots Learning of ICARUS"""
 
@@ -177,7 +175,6 @@ def plotLearning():
             except:
                 break
 
-    print(step_list, loss_list, maveloss_list)
     # plotting stuff now
     fig, ax = plt.subplots(figsize=(10,4), dpi=150)
     plt.plot(step_list, loss_list, color=colors["black"], marker=".", label="Loss")

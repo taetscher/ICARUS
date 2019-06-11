@@ -18,7 +18,7 @@ file_list = os.listdir(img_folder)
 
 
 #setting up YOLO
-options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 360150, "threshold": 0.5, 'gpu': 0.75}
+options = {"model": "cfg/tiny-yolo-ICARUSv3.cfg", "load": 8700, "threshold": 0.1, 'gpu': 0}
 tfnet = TFNet(options)
 
 print("Running validation of ICARUS...")
@@ -34,6 +34,7 @@ for number in file_list:
 
     # predict labels of objects in image
     result = tfnet.return_predict(imgcv)
+    print(result)
 
     if len(result) > 0:
         detect += 1
@@ -57,9 +58,9 @@ for number in file_list:
 # perpare validation statistics
 stop = datetime.now()
 n = len(file_list)
-percentage = 100*(detect/n)
-avr_confidence = np.mean(confidence_list)
-med_confidence = np.median(confidence_list)
+percentage = round(100*(detect/n), 2)
+avr_confidence = round(np.mean(confidence_list), 2)
+med_confidence = round(np.median(confidence_list), 2)
 
 # save validation statistics
 with open("icarusVALIDATION/validationStatistics.txt",'a') as logger:

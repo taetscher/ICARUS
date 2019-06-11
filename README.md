@@ -54,7 +54,7 @@ ICARUS is currently a work in progress.
 Here is a list of the currently top performing checkpoints from training. The best performing checkpoint is highlighted in bold.
 Their success is measured as percentage of ASR detections on a validation dataset:
 
-RMSPROP standard (with tweaks in learning rate whenever loss plateaus were hit)
+ICARUS v2, RMSPROP standard (with tweaks in learning rate whenever loss plateaus were hit)
 - 94500 (59%, med. conf: 0.61)
 - 96500 (64%, med. conf: 0.6)
 - 105000 (72%, med conf: 0.6)
@@ -76,12 +76,15 @@ RMSPROP standard (with tweaks in learning rate whenever loss plateaus were hit)
 RMSPROP testing (with --momentum 0.9 and --lr 0.00008)
 - **362050** (74.5%, med conf: 0.88, however also pretty error-prone)
 
-ADAM
+ICARUSv2, ADAM
 - asdf
+
+ICARUSv3, RMSPROP
+
 
 
 ICARUS was trained using the tiny-yolo-voc.cfg file from [pjreddie.com](https://pjreddie.com/darknet/yolo/).
-It was trained using the RMSPROP Optimizer and the following commands:
+It was trained using the RMSPROP Optimizer and the following commands:  
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load -1 --batch 10`
 
 At first I trained it with a batch size of 8 and 4 subdivisions. After stagnating in training I moved to batch size of 8 and 0 subdivisions.
@@ -91,13 +94,15 @@ My hardware setup coulnd't handle more than batch size 10 for some reason.
 Whenever a plateau of moving ave loss was hit or whenever random "nan" values would show up, I would lower the learning rate and 
 continue training this way.
 
-A _second_ version of ICARUS**v2** was trained, using the ADAM Optimizer
+A _second_ version of ICARUS**v2** was trained, using the ADAM Optimizer  
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer adam --load -1`
 
 A third version of ICARUS, ICARUSv3 was trained using the RMSPROP Optimizer but also taking 
-into consideration lessons learned along the way.
+into consideration lessons learned along the way.  
 `python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 8 --gpu 0.77 --save 3000 --trainer rmsprop`
 
+at step 6000, at a moving average loss of about 8 I changed to the following:  
+`python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1  --lr 0.000005`
 
 To log the values for training , I changed flow.py in `/darkflow/net` as follows.  
   
