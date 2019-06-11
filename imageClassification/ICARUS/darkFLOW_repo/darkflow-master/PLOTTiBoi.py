@@ -6,11 +6,14 @@ import numpy as np
 icarus_version = 2
 thresh = 0.5
 data = {}
+detects = {}
 
-colors = {"grey":"#494a4c", "black":"#0c0c0c"}
+colors = {"grey":"#494a4c", "black":"#0c0c0c", "blue":"#000856", "purple":"#8c0289"}
 
 
 def plotDetection():
+    """Plots Detections made with ICARUS"""
+
     with open("icarusOUTPUT/ICARUS{}/output.csv".format(icarus_version)) as s_file:
 
         while True:
@@ -22,6 +25,14 @@ def plotDetection():
                 predictions = eval(line[5])
 
                 d = 0
+                #count on how many images detections were made
+                if not day in detects:
+                    detects[day] = 1
+
+                if any(predictions) > thresh:
+                    detects[day] += 1
+
+                #count how many predictions in total
                 for prediction in predictions:
                     prediction = predictions[d]['confidence']
                     if prediction > thresh:
@@ -49,7 +60,8 @@ def plotDetection():
 
     # plotting stuff now
     fig, ax = plt.subplots(figsize=(10,4), dpi=150)
-    plt.plot(data.keys(), data.values(), color=colors["black"], marker=".")
+    plt.plot(data.keys(), data.values(), color=colors["black"], marker=".", label="Total Predictions")
+    plt.plot(detects.keys(), detects.values(), color=colors["purple"], marker="x", label="Total Images with Detections")
 
     # label the figure
     plt.suptitle("DETECTIONS OF ALL SEASON ROADS WITH ICARUSv{}".format(icarus_version))
@@ -57,6 +69,7 @@ def plotDetection():
     plt.xlabel("DATE")
     plt.ylabel("DETECTIONS")
     ax.set_xticklabels(x)
+    ax.legend(loc="upper center")
 
     # customize axes
     ax.spines['top'].set_visible(False)
@@ -70,6 +83,8 @@ def plotDetection():
     print("plotAssessment done!")
 
 def plotHarvests():
+    """Plots Input data (number of tweets saved)"""
+
     # infile setup
     in_path = "twitterstreamRASPBERRY/harvests/"
     harvests = os.listdir(in_path)
@@ -137,4 +152,48 @@ def plotHarvests():
     plt.show()
 
 
-plotDetection()
+def plotLearning():
+    """Plots Learning of ICARUS"""
+
+    step_list = []
+    loss_list = []
+    maveloss_list = []
+
+    with open("training_stats.csv") as infile:
+        while True:
+            line = infile.readline().split(", ")
+            try:
+                step = int(line[0])
+                loss = round(float(line[1]), 2)
+                maveloss = round(float(line[2]),2)
+
+                step_list.append(step)
+                loss_list.append(loss)
+                maveloss_list.append(maveloss)
+
+            except:
+                break
+
+    print(step_list, loss_list, maveloss_list)
+    # plotting stuff now
+    fig, ax = plt.subplots(figsize=(10,4), dpi=150)
+    plt.plot(step_list, loss_list, color=colors["black"], marker=".", label="Loss")
+    plt.plot(step_list, maveloss_list, color=colors["purple"], marker="x", label="Moving Average Loss")
+
+    # label the figure
+    plt.suptitle("    TRAINING PROGRESS OF ICARUSv{}".format(icarus_version), horizontalalignment="center")
+    plt.title("TRAINED WITH RMSPROP OPTIMIZER", color=colors["grey"], horizontalalignment="center")
+    plt.xlabel("STEP")
+    plt.ylabel("LOSS")
+    ax.legend(loc="upper center")
+
+    # customize axes
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_color(colors["grey"])
+    ax.spines['left'].set_color(colors["grey"])
+
+
+    plt.show()
+
+plotLearning()

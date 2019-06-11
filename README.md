@@ -168,7 +168,8 @@ quickly check what ICARUS is outputting.
 
 
 ### PLOTTiBoi  
-PLOTTiBoi was written to visualize some of the results of this thesis.
+PLOTTiBoi was written to visualize some of the results of this thesis. It has two modes, one to plot the total amount
+of tweets saved per day and one to plot the detections made with ICARUS.
 
 ----
 
