@@ -91,10 +91,15 @@ My hardware setup coulnd't handle more than batch size 10 for some reason.
 Whenever a plateau of moving ave loss was hit or whenever random "nan" values would show up, I would lower the learning rate and 
 continue training this way.
 
-A second version of ICARUSv2 was trained, using the ADAM Optimizer
+A _second_ version of ICARUS**v2** was trained, using the ADAM Optimizer
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer adam --load -1`
 
-To log the values for training with the ADAM Optimizer, I changed flow.py in `/darkflow/net` as follows.  
+A third version of ICARUS, ICARUSv3 was trained using the RMSPROP Optimizer but also taking 
+into consideration lessons learned along the way.
+`python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 8 --gpu 0.77 --save 3000 --trainer rmsprop`
+
+
+To log the values for training , I changed flow.py in `/darkflow/net` as follows.  
   
         with open("training_stats.csv", 'a') as logger:
             logger.write("{}, {}, {}{}".format(step_now, loss, loss_mva, "\n"))

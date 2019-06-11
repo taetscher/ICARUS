@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 
-icarus_version = 2
+icarus_version = 3
 trainer = "RMSPROP"
 thresh = 0.5
 data = {}
@@ -80,8 +80,10 @@ def plotDetection():
     ax.tick_params(axis='x', colors=colors["grey"])
     ax.tick_params(axis='y', colors=colors["grey"])
 
+    #save and show
+    plt.savefig("Plots/detections.png")
     plt.show()
-    print("plotAssessment done!")
+
 
 def plotHarvests():
     """Plots Input data (number of tweets saved)"""
@@ -148,8 +150,8 @@ def plotHarvests():
     ax.tick_params(axis='x', colors=colors["grey"])
     ax.tick_params(axis='y', colors=colors["grey"])
 
-
-
+    # save and show
+    plt.savefig("Plots/harvests.png")
     plt.show()
 
 
@@ -194,7 +196,9 @@ def plotLearning():
     ax.spines['bottom'].set_color(colors["grey"])
     ax.spines['left'].set_color(colors["grey"])
 
-
+    # save and show
+    plt.savefig("Plots/learning.png")
     plt.show()
+
 
 plotLearning()
