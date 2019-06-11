@@ -52,15 +52,12 @@ this is a dictionary that sets up yolo.
 [gpu] specifies whether yolo should run on cpu or gpu - keep in mind for running on gpu you'll need additional software by nvidia
 '''
 print("Setting up yolo...")
-#yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 362850, "threshold": 0.5, "gpu": 0.9}
-tfnet = TFNet(options)
 
 
 
 # global variables
 err = 0
-icarus_version = 2
+icarus_version = 3
 n1 = 0
 n2 = 0
 l = 0
@@ -68,6 +65,12 @@ found = 0
 start = datetime.now()
 gmail_account = "taetschericarus@gmail.com"
 password = eval(open("gmail_credentials.txt").read())
+
+
+#yolo setup
+options = {"model": "cfg/tiny-yolo-ICARUSv{}.cfg".format(icarus_version), "load": 362850, "threshold": 0.5, "gpu": 0.9}
+tfnet = TFNet(options)
+
 
 # add or remove accounts that should recieve an email when ICARUS is done
 reciever_accounts = ["beni.schuepbach@hispeed.ch", "auteblauwau@hotmail.com", "ch.schuepbach@swissonline.ch"]

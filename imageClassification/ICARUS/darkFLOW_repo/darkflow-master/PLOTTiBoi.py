@@ -4,6 +4,7 @@ import numpy as np
 
 
 icarus_version = 2
+trainer = "RMSPROP"
 thresh = 0.5
 data = {}
 detects = {}
@@ -178,11 +179,11 @@ def plotLearning():
     # plotting stuff now
     fig, ax = plt.subplots(figsize=(10,4), dpi=150)
     plt.plot(step_list, loss_list, color=colors["black"], marker=".", label="Loss")
-    plt.plot(step_list, maveloss_list, color=colors["purple"], marker="x", label="Moving Average Loss")
+    plt.plot(step_list, maveloss_list, color=colors["purple"], marker="x", label="Moving Average Loss", linewidth=1)
 
     # label the figure
-    plt.suptitle("    TRAINING PROGRESS OF ICARUSv{}".format(icarus_version), horizontalalignment="center")
-    plt.title("TRAINED WITH RMSPROP OPTIMIZER", color=colors["grey"], horizontalalignment="center")
+    plt.suptitle("    LEARNING PROGRESS OF ICARUSv{}".format(icarus_version), horizontalalignment="center")
+    plt.title("TRAINED WITH {} OPTIMIZER".format(trainer), color=colors["grey"], horizontalalignment="center")
     plt.xlabel("STEP")
     plt.ylabel("LOSS")
     ax.legend(loc="upper center")
