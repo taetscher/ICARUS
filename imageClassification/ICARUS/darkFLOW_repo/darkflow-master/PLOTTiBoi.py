@@ -3,8 +3,8 @@ import os
 import numpy as np
 
 
-icarus_version = 3
-trainer = "RMSPROP"
+icarus_version = 2
+trainer = "ADAM"
 thresh = 0.5
 data = {}
 detects = {}
@@ -174,6 +174,7 @@ def plotLearning():
 
             except:
                 break
+
 
     # plotting stuff now
     fig, ax = plt.subplots(figsize=(10,4), dpi=150)

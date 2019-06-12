@@ -97,6 +97,11 @@ continue training this way.
 A _second_ version of ICARUS**v2** was trained, using the ADAM Optimizer  
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer adam --load -1`
 
+
+
+
+
+
 A third version of ICARUS, ICARUSv3 was trained using the RMSPROP Optimizer but also taking 
 into consideration lessons learned along the way.  
 `python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 8 --gpu 0.77 --save 3000 --trainer rmsprop`
@@ -104,7 +109,13 @@ into consideration lessons learned along the way.
 at step 6000, at a moving average loss of about 8 I changed to the following:  
 `python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1  --lr 0.000005`
 
-To log the values for training , I changed flow.py in `/darkflow/net` as follows.  
+at step 10500 I changed to the following:  
+`python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1  --lr 0.0000005`
+
+at step 17100 I changed again to the following:  
+`python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.0000001`
+
+**To log the values for training , I changed flow.py in** `/darkflow/net` **as follows.**  
   
         with open("training_stats.csv", 'a') as logger:
             logger.write("{}, {}, {}{}".format(step_now, loss, loss_mva, "\n"))
