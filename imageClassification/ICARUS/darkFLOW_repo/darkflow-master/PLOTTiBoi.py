@@ -4,12 +4,12 @@ import numpy as np
 
 
 icarus_version = 2
-trainer = "ADAM"
+trainer = "RMSPROP"
 thresh = 0.5
 data = {}
 detects = {}
 
-colors = {"grey":"#494a4c", "black":"#0c0c0c", "blue":"#000856", "purple":"#8c0289"}
+colors = {"grey":"#494a4c", "black":"#0c0c0c", "blue":"#000856", "purple":"#8c0289", "pink":"#ef47ff"}
 
 
 def plotDetection():
@@ -175,11 +175,16 @@ def plotLearning():
             except:
                 break
 
+    # calculate the trendline for moving average loss (least squares polynomial fit)
+    z = np.polyfit(step_list, maveloss_list, deg=1)
+    p = np.poly1d(z)
+
 
     # plotting stuff now
     fig, ax = plt.subplots(figsize=(10,4), dpi=150)
     plt.plot(step_list, loss_list, color=colors["black"], marker=".", label="Loss")
     plt.plot(step_list, maveloss_list, color=colors["purple"], marker="x", label="Moving Average Loss", linewidth=1)
+    plt.plot(step_list, p(step_list),"-", color=colors["pink"], label="MAL Trendline")
 
     # label the figure
     plt.suptitle("    LEARNING PROGRESS OF ICARUSv{}".format(icarus_version), horizontalalignment="center")

@@ -57,7 +57,7 @@ print("Setting up yolo...")
 
 # global variables
 err = 0
-icarus_version = 3
+icarus_version = 2
 n1 = 0
 n2 = 0
 l = 0

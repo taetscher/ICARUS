@@ -72,18 +72,14 @@ ICARUS v2, RMSPROP standard (with tweaks in learning rate whenever loss plateaus
 - 344150 (71%, med conf: 0.62)
 - 344750 (68.5%, med conf: 0.63)
 - **357450** (80%, med conf: 0.61)
-
-RMSPROP testing (with --momentum 0.9 and --lr 0.00008)
-- **362050** (74.5%, med conf: 0.88, however also pretty error-prone)
+- 364350 (65.5%, med conf: 0.63)
 
 ICARUSv2, ADAM
 - asdf
 
-ICARUSv3, RMSPROP
 
 
-
-ICARUS was trained using the tiny-yolo-voc.cfg file from [pjreddie.com](https://pjreddie.com/darknet/yolo/).
+ICARUSv2 was trained using the tiny-yolo-voc.cfg file from [pjreddie.com](https://pjreddie.com/darknet/yolo/).
 It was trained using the RMSPROP Optimizer and the following commands:  
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load -1 --batch 10`
 
@@ -94,34 +90,23 @@ My hardware setup coulnd't handle more than batch size 10 for some reason.
 Whenever a plateau of moving ave loss was hit or whenever random "nan" values would show up, I would lower the learning rate and 
 continue training this way.
 
+So at step 362550 for example, I changed to the following:  
+`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load 362550 --trainer rmsprop --batch 10 --save 3000 --lr 0.00000005`
+
+Then at step 365850 I changed again to:  
+`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.000000008`
+
 A _second_ version of ICARUS**v2** was trained, using the ADAM Optimizer  
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer adam --load -1`
 
 
-
-
-
-
-A third version of ICARUS, ICARUSv3 was trained using the RMSPROP Optimizer but also taking 
-into consideration lessons learned along the way.  
-`python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 8 --gpu 0.77 --save 3000 --trainer rmsprop`
-
-at step 6000, at a moving average loss of about 8 I changed to the following:  
-`python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1  --lr 0.000005`
-
-at step 10500 I changed to the following:  
-`python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1  --lr 0.0000005`
-
-at step 17100 I changed again to the following:  
-`python flow --model cfg/tiny-yolo-ICARUSv3.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.0000001`
-
-**To log the values for training , I changed flow.py in** `/darkflow/net` **as follows.**  
+**To log the values for training , I changed flow.py in** `/darkflow/net` **as follows:**  
   
         with open("training_stats.csv", 'a') as logger:
             logger.write("{}, {}, {}{}".format(step_now, loss, loss_mva, "\n"))
             logger.close()
             
- This now writes a csv file in the root directory of `/darkflow`
+ This now writes a csv file in the root directory of `/darkflow`.
 
 
 If you want to use some version of ICARUS yourself, leave me a message here on GitHub and ask me to send you a .ckpt file. I will gladly do so.
