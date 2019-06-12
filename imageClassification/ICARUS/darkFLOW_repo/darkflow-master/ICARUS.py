@@ -68,7 +68,7 @@ password = eval(open("gmail_credentials.txt").read())
 
 
 #yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUSv{}.cfg".format(icarus_version), "load": 362850, "threshold": 0.5, "gpu": 0.9}
+options = {"model": "cfg/tiny-yolo-ICARUSv{}.cfg".format(icarus_version), "load": 370950, "threshold": 0.5, "gpu": 0.7}
 tfnet = TFNet(options)
 
 
@@ -121,6 +121,8 @@ for file in harvests:
     with open(in_path + str(file)) as fp:
         line = fp.readline()
 
+
+
         while line:
             try:
                 # read in lines as arrays
@@ -170,8 +172,7 @@ for file in harvests:
                                 "{}; {}; {}; {}; {}; {}\n".format(coord_x, coord_y, medurl, timestamp, avr_confidence,
                                                                   result))
 
-                        # count how many images were actually assessed
-                        n2 += 1
+
 
 
                     else:
@@ -196,10 +197,13 @@ for file in harvests:
                 err += 1
                 pass
 
+            # count how many images were actually assessed
+            n2 += 1
+
             # go to next line
             line = fp.readline()
 
-            print("assessing image {}/{}".format(n2, n1))
+            print("assessing image {}/{}, time: {}".format(n2, n1, str(datetime.now()-start))[:-7])
 
 
 #prepare to save metadata of run

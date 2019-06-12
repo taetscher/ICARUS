@@ -69,13 +69,14 @@ ICARUS v2, RMSPROP standard (with tweaks in learning rate whenever loss plateaus
 - 256000 (66%, med conf: 0.64)
 - 258750 (73.5%, med conf: 0.61)
 - 321950 (59.5%, med conf: 0.64)
-- 344150 (71%, med conf: 0.62)
+- **344150** (71%, med conf: 0.62)
 - 344750 (68.5%, med conf: 0.63)
 - **357450** (80%, med conf: 0.61)
 - 364350 (65.5%, med conf: 0.63)
 
 ICARUSv2, ADAM
-- asdf
+- none yet
+
 
 
 
@@ -95,6 +96,9 @@ So at step 362550 for example, I changed to the following:
 
 Then at step 365850 I changed again to:  
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.000000008`
+
+At step 369750:  
+`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.0000000008`
 
 A _second_ version of ICARUS**v2** was trained, using the ADAM Optimizer  
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer adam --load -1`
@@ -147,6 +151,8 @@ There are a number of interesting points that were raised with the implementatio
 ### ICARUS
 
 explain history (ICARUS & ICARUSv2), how to use and implement
+
+A sensible threshold value for analysis would seem to be upwards of `"thresh" : "0.83"`, as below there are too many false positives.
 
 ### ICARUSaver
 ICARUSaver was designed to save the output of ICARUS as images including prediction bounding boxes with labels. You can provide a custom value for thresh (the yolo threshold).
