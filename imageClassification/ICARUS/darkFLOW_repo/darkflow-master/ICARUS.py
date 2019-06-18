@@ -45,7 +45,7 @@ benjamin.schuepbach@students.unibe.ch
 
 
 '''
-this is a dictionary that sets up yolo.
+options is a dictionary that sets up yolo:
 [model] is a parameter that specifies which model to use like folder/model.cfg
 [load] is used to load predefined weights like bin/weights.weights
 [threshold] specifies the minimal confidence factor yolo needs to draw a bounding box
@@ -120,8 +120,6 @@ print("ICARUS Initiated\n")
 for file in harvests:
     with open(in_path + str(file)) as fp:
         line = fp.readline()
-
-
 
         while line:
             try:
@@ -206,6 +204,10 @@ for file in harvests:
             print("assessing image {}/{}, time: {}".format(n2, n1, str(datetime.now()-start))[:-7])
 
 
+    #log progress, to see if ICARUS has done well before a potential fail
+    with open("icarusOUTPUT/MetaData.txt", 'a') as logger:
+        logger.write("Infile {} assessed successfully\n".format(file))
+
 #prepare to save metadata of run
 stop = datetime.now()
 percentage = 100*(found/n2)
@@ -237,14 +239,12 @@ message = """ICARUS1 finished run at {}\n{}\nRan on: {}\nNumber of Images Assess
 
 context = ssl.create_default_context()
 
+#send email confirming ICARUS has finished
 for account in reciever_accounts:
     print("Sending confirmation Email to {}".format(account))
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         server.login(gmail_account, password)
         server.sendmail(gmail_account, account, message)
-
-
-
 
 print("-"*30)
 print("\nEmail notification sent to {}".format(reciever_accounts))

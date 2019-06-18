@@ -3,6 +3,8 @@ import os
 import numpy as np
 
 
+
+
 icarus_version = 2
 trainer = "RMSPROP"
 thresh = 0.5
@@ -202,6 +204,5 @@ def plotLearning():
     # save and show
     plt.savefig("Plots/learning.png")
     plt.show()
-
 
 plotLearning()

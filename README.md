@@ -179,10 +179,9 @@ ICARUSViewer works just like ICARUSaver. But instead of saving output files, the
 quickly check what ICARUS is outputting.
 
 
-### PLOTTiBoi  
+### PLOTTiBOi  
 PLOTTiBoi was written to visualize some of the results of this thesis. It has two modes, one to plot the total amount
 of tweets saved per day and one to plot the detections made with ICARUS.
-
 ----
 
 ## ACKNOWLEDGEMENTS
