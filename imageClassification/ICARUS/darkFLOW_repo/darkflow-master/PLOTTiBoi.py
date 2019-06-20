@@ -89,6 +89,8 @@ def plotDetection():
 def plotHarvests():
     """Plots Input data (number of tweets saved)"""
 
+    months = []
+
     # infile setup
     in_path = "twitterstreamRASPBERRY/harvests/"
     harvests = os.listdir(in_path)
@@ -102,7 +104,7 @@ def plotHarvests():
                     line = infile.readline().split(",")
                     day = line[3].split(" ")[1]
                     hour = line[3].split(" ")[2]
-
+                    month = line[3].split(" ")[1][:-3]
 
                     # if the day is not already in the list,
                     if not day in data:
@@ -112,35 +114,52 @@ def plotHarvests():
                         data[day] += 1
 
 
+                    months.append(month)
+
+
                 except IndexError:
                     break
 
             infile.close()
+
+    print(months)
 
     keys = data.keys()
     x = []
     for entry in keys:
         date = entry.split("-")[2]
         x.append(date)
-    y = data.values()
+    y = list(data.values())
+    ave = np.average(y)
+    average_list = []
+
+    for element in range(len(y)):
+        average_list.append(ave)
 
     # plotting stuff now
     fig, ax = plt.subplots(figsize=(10,4), dpi=150)
-    plt.plot(keys, y, color=colors["black"], marker=".")
+    plt.plot(keys, y, color=colors["black"], marker=".", label="Tweets streamed by twitter streaming API")
+    plt.plot(keys, average_list, label="Average", color=colors["purple"], alpha=0.8)
 
     # label the figure
     plt.suptitle("TWEETS WITH GEOTAG AND MEDIA APPENDED\n")
     plt.title("MAY 03 - JUNE 05 2019", color=colors["grey"])
     plt.xlabel("DATE", color=colors["black"])
     plt.ylabel("TWEETS", color=colors["black"])
-    ax.set_xticklabels(x)
+    ax.set_xticklabels(x, fontsize=5)
 
+    #annotations
     plt.annotate(
         " RasPi down", xy=("2019-05-16",2000),
         xytext=("2019-05-16", 3000), color=colors["grey"])
     plt.annotate(
         " RasPi down", xy=("2019-06-02", 2000),
         xytext=("2019-06-02", 5000), color=colors["grey"])
+    plt.annotate(
+        " RasPi down", xy=("2019-06-12", 2000),
+        xytext=("2019-06-12", 1700), color=colors["grey"])
+
+    plt.legend(loc="upper center", fontsize=8)
 
 
     # customize axes
@@ -150,6 +169,11 @@ def plotHarvests():
     #ax.spines['left'].set_color("grey")
     ax.tick_params(axis='x', colors=colors["grey"])
     ax.tick_params(axis='y', colors=colors["grey"])
+
+    every_nth = 2
+    for n, label in enumerate(ax.xaxis.get_ticklabels()):
+        if n % every_nth != 0:
+            label.set_visible(False)
 
     # save and show
     plt.savefig("Plots/harvests.png")
@@ -205,4 +229,4 @@ def plotLearning():
     plt.savefig("Plots/learning.png")
     plt.show()
 
-plotLearning()
+plotHarvests()
