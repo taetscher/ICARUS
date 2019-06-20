@@ -179,9 +179,17 @@ ICARUSViewer works just like ICARUSaver. But instead of saving output files, the
 quickly check what ICARUS is outputting.
 
 
-### PLOTTiBOi  
+### PLOTTiBOi
 PLOTTiBoi was written to visualize some of the results of this thesis. It has two modes, one to plot the total amount
 of tweets saved per day and one to plot the detections made with ICARUS.
+
+
+### mappyBoi  
+See [GitHub Page for mappyBoi](https://github.com/taetscher/mappyBoi) for the source code.
+mappyBoi is used to visualize the input/output data of ICARUS as geographic maps.
+It is important to note, that due to the projection (PlateCarrée, EPSG 32662), I decided againts putting a scale bar on the map.
+The issues with projected coordinate systems and scalebars are well elaborated in a nice article by user _abuckley_ over at https://www.esri.com/arcgis-blog/products/product/mapping/back-to-the-issue-of-scale-bars/.  
+
 ----
 
 ## ACKNOWLEDGEMENTS
