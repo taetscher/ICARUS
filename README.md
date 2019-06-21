@@ -1,4 +1,4 @@
-**I**mage **C**lassification **A**pplication for **R**oad **U**tility **S**tatus  
+﻿**I**mage **C**lassification **A**pplication for **R**oad **U**tility **S**tatus  
 
 # :bird: :sunny: ICARUS  
 
@@ -177,6 +177,9 @@ quickly check what ICARUS is outputting.
 I had to write a quick program using the [_where the ISS at?_ API](https://wheretheiss.at/w/developer) to track the flight path of
 the International Space Station (ISS). It turns out the ISS has its own twitter account - and I believed it showed in my data.
 So I deployed the ISS tracker to the Raspberry Pi and compared its flight path with the strange tweets coming from the middle of the ocean.
+
+Turns out I was half right: these images came from the [Horizon](https://twitter.com/bitsofpluto) and [DSCOVR](https://twitter.com/dscovr_epic?lang=de) spacecrafts.
+Neat to see the ISS orbit on a map though lol. I found this out through the Google Chrome feature "search Google for this image".
 
 
 ### PLOTTiBOi
