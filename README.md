@@ -73,12 +73,7 @@ ICARUS v2, RMSPROP standard (with tweaks in learning rate whenever loss plateaus
 - 344750 (68.5%, med conf: 0.63)
 - **357450** (80%, med conf: 0.61)
 - 364350 (65.5%, med conf: 0.63)
-
-ICARUSv2, ADAM
-- none yet
-
-
-
+- 370950(last checkpoint, 66%, med conf: 0.63) 
 
 ICARUSv2 was trained using the tiny-yolo-voc.cfg file from [pjreddie.com](https://pjreddie.com/darknet/yolo/).
 It was trained using the RMSPROP Optimizer and the following commands:  
@@ -177,6 +172,11 @@ run to a seperate ouptut file (validationStatistics.txt).
 ### ICARUSViewer
 ICARUSViewer works just like ICARUSaver. But instead of saving output files, they are directly displayed on screen. This functionality can be useful if you just want to
 quickly check what ICARUS is outputting.
+
+### ISStracker  
+I had to write a quick program using the [_where the ISS at?_ API](https://wheretheiss.at/w/developer) to track the flight path of
+the International Space Station (ISS). It turns out the ISS has its own twitter account - and I believed it showed in my data.
+So I deployed the ISS tracker to the Raspberry Pi and compared its flight path with the strange tweets coming from the middle of the ocean.
 
 
 ### PLOTTiBOi
