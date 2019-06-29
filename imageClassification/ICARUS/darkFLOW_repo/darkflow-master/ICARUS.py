@@ -119,89 +119,93 @@ print("ICARUS Initiated\n")
 
 for file in harvests:
     with open(in_path + str(file)) as fp:
-        line = fp.readline()
 
-        while line:
-            try:
-                # read in lines as arrays
-                array = line.split(", ")
+        try:
+            line = fp.readline()
 
-                # extract coordinate information (lat/long), link to media, timestamp, uuid
-                coord_x = array[0]
-                coord_y = array[1]
-                medurl = array[2]
-                timestamp = array[-2]
-                indi_id = array[-1]
-
-                print(str(medurl))
-
-                # download image, if this fails, go with next one
+            while line:
                 try:
-                    img_data = requests.get(medurl, timeout=1).content
-                    temp_name = 'temp_img.jpg'
+                    # read in lines as arrays
+                    array = line.split(", ")
 
-                    with open('images/temp/' + temp_name, 'wb') as handler:
-                        # save image data from URL
-                        handler.write(img_data)
-                        handler.close()
+                    # extract coordinate information (lat/long), link to media, timestamp, uuid
+                    coord_x = array[0]
+                    coord_y = array[1]
+                    medurl = array[2]
+                    timestamp = array[-2]
+                    indi_id = array[-1]
 
-                    # pass image to yolo
-                    imgcv = cv2.imread('images/temp/' + temp_name)
+                    print(str(medurl))
 
-                    # assess image with yolo
-                    result = tfnet.return_predict(imgcv)
+                    # download image, if this fails, go with next one
+                    try:
+                        img_data = requests.get(medurl, timeout=1).content
+                        temp_name = 'temp_img.jpg'
 
-                    if len(result) > 0:
-                        # count for how many images AllSeasonRoads were predicted
-                        found += 1
+                        with open('images/temp/' + temp_name, 'wb') as handler:
+                            # save image data from URL
+                            handler.write(img_data)
+                            handler.close()
 
-                        # prepare yolo output to be saved in csv
-                        a = range(0, len(result))
-                        confidence_list = []
-                        for element in a:
-                            confidence = result[element]['confidence']
-                            confidence_list.append(confidence)
+                        # pass image to yolo
+                        imgcv = cv2.imread('images/temp/' + temp_name)
 
-                        avr_confidence = np.mean(confidence_list)
+                        # assess image with yolo
+                        result = tfnet.return_predict(imgcv)
 
-                        # basically, if anything was detected (if any all_Season_Roads were found), save data
-                        with open("icarusOUTPUT/ICARUS{}/{}.csv".format(icarus_version, "output"), 'a') as outfile:
-                            outfile.write(
-                                "{}; {}; {}; {}; {}; {}\n".format(coord_x, coord_y, medurl, timestamp, avr_confidence,
-                                                                  result))
+                        if len(result) > 0:
+                            # count for how many images AllSeasonRoads were predicted
+                            found += 1
+
+                            # prepare yolo output to be saved in csv
+                            a = range(0, len(result))
+                            confidence_list = []
+                            for element in a:
+                                confidence = result[element]['confidence']
+                                confidence_list.append(confidence)
+
+                            avr_confidence = np.mean(confidence_list)
+
+                            # basically, if anything was detected (if any all_Season_Roads were found), save data
+                            with open("icarusOUTPUT/ICARUS{}/{}.csv".format(icarus_version, "output"), 'a') as outfile:
+                                outfile.write(
+                                    "{}; {}; {}; {}; {}; {}\n".format(coord_x, coord_y, medurl, timestamp, avr_confidence,
+                                                                      result))
 
 
 
 
-                    else:
-                        # elso continue to the next tweet
+                        else:
+                            # elso continue to the next tweet
+                            pass
+
+                        print(result)
+
+                    # if any of the above fail, pass and continue with next one.
+                    except:
+                        print("Error occured, proceeding to next entry.")
+                        err += 1
                         pass
 
-                    print(result)
 
-                # if any of the above fail, pass and continue with next one.
-                except:
-                    print("Error occured, proceeding to next entry.")
+
+
+
+                except AssertionError:
+                    # this catches errors of type 'image is not of type np.ndarray'
+                    print("numpy fucked up")
                     err += 1
                     pass
 
+                # count how many images were actually assessed
+                n2 += 1
 
+                # go to next line
+                line = fp.readline()
 
-
-
-            except AssertionError:
-                # this catches errors of type 'image is not of type np.ndarray'
-                print("numpy fucked up")
-                err += 1
-                pass
-
-            # count how many images were actually assessed
-            n2 += 1
-
-            # go to next line
-            line = fp.readline()
-
-            print("assessing image {}/{}, time: {}".format(n2, n1, str(datetime.now()-start))[:-7])
+                print("assessing image {}/{}, time: {}".format(n2, n1, str(datetime.now()-start))[:-7])
+        except:
+            pass
 
 
     #log progress, to see if ICARUS has done well before a potential fail
@@ -221,7 +225,7 @@ with open("icarusOUTPUT/MetaData.txt", 'a') as logger:
     logger.write("\nICARUS{} running with the following options".format(icarus_version))
     logger.write("\nYOLO-Options: {}".format(options))
     logger.write("\nNumber of Images assessed: {}".format(n2))
-    logger.write("\nAllSeasonRoads detected: {}, as percentage: {}%".format(found, percentage))
+    logger.write("\nAllSeasonRoads detected in {} images, as percentage: {}%".format(found, percentage))
     logger.write("\nErrors occured during assessments: {}".format(err))
     logger.write("\nDuration: [HH:MM:SS.MS] {}".format(stop - start))
     logger.write("\nConfirmation Email sent from {} to: {}\n".format(gmail_account,reciever_accounts))
@@ -234,7 +238,7 @@ print("Statistics of run saved...")
 #set up email to send
 port = 465  # For SSL
 smtp_server = "smtp.gmail.com"
-message = """ICARUS1 finished run at {}\n{}\nRan on: {}\nNumber of Images Assessed: {}\nAllSeasonRoads detected: {}\nDuration: {}\n\n""".format(str(start)[:10], "-"*33, harvests, n1, found, stop-start)
+message = """ICARUS{} finished run at {}\n{}\nRan on: {}\nNumber of Images Assessed: {}\nAllSeasonRoads detected: {}\nDuration: {}\n\n""".format(icarus_version,str(start)[:10], "-"*33, harvests, n1, found, stop-start)
 
 
 context = ssl.create_default_context()
