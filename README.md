@@ -173,6 +173,9 @@ run to a seperate ouptut file (validationStatistics.txt).
 ICARUSViewer works just like ICARUSaver. But instead of saving output files, they are directly displayed on screen. This functionality can be useful if you just want to
 quickly check what ICARUS is outputting.
 
+### ICARUSTest
+ICARUSTest was used to visualize the performance of different checkpoints on the validation dataset.
+
 ### ISStracker  
 I had to write a quick program using the [_where the ISS at?_ API](https://wheretheiss.at/w/developer) to track the flight path of
 the International Space Station (ISS). It turns out the ISS has its own twitter account - and I believed it showed in my data.
