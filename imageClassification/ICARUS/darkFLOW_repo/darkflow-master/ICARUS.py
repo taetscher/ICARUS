@@ -68,7 +68,7 @@ password = eval(open("gmail_credentials.txt").read())
 
 
 #yolo setup
-options = {"model": "cfg/tiny-yolo-ICARUSv{}.cfg".format(icarus_version), "load": 370950, "threshold": 0.5, "gpu": 0.7}
+options = {"model": "cfg/tiny-yolo-ICARUSv{}.cfg".format(icarus_version), "load": 344750, "threshold": 0.5, "gpu": 0.7}
 tfnet = TFNet(options)
 
 
