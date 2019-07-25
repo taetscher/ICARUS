@@ -13,7 +13,7 @@ import os
 ICARUS1 (Image Classification Application for Road Utility Status)
 
 This program provides an algorithm to determine the presence/status
-of roads in digital images.
+of roads in digital bilder.
 
 It is part of a masters thesis at the Geographic Institute of the
 University of Bern (Switzerland)
@@ -83,7 +83,7 @@ harvests = os.listdir(in_path)
 now = str(datetime.now())[:10]
 
 
-# check how many images are to be processed
+# check how many bilder are to be processed
 print("Calculating time ICARUS will need...")
 print("ICARUS will assess the following infiles:")
 for file in harvests:
@@ -103,7 +103,7 @@ for file in harvests:
 
 #calculate approximate time to finish task
 app_time = n1*0.5/60/60
-print("\nInfiles contain {} links to images. It will take approximately {} hours for ICARUS to assess all images.\n(Calculation based on approximately 2 Images/s)\n".format(n1,int(app_time)))
+print("\nInfiles contain {} links to bilder. It will take approximately {} hours for ICARUS to assess all bilder.\n(Calculation based on approximately 2 Images/s)\n".format(n1,int(app_time)))
 
 #get info for sending email when ICARUS is done
 print("-"*30, "\n")
@@ -142,19 +142,19 @@ for file in harvests:
                         img_data = requests.get(medurl, timeout=1).content
                         temp_name = 'temp_img.jpg'
 
-                        with open('images/temp/' + temp_name, 'wb') as handler:
+                        with open('bilder/temp/' + temp_name, 'wb') as handler:
                             # save image data from URL
                             handler.write(img_data)
                             handler.close()
 
                         # pass image to yolo
-                        imgcv = cv2.imread('images/temp/' + temp_name)
+                        imgcv = cv2.imread('bilder/temp/' + temp_name)
 
                         # assess image with yolo
                         result = tfnet.return_predict(imgcv)
 
                         if len(result) > 0:
-                            # count for how many images AllSeasonRoads were predicted
+                            # count for how many bilder AllSeasonRoads were predicted
                             found += 1
 
                             # prepare yolo output to be saved in csv
@@ -197,7 +197,7 @@ for file in harvests:
                     err += 1
                     pass
 
-                # count how many images were actually assessed
+                # count how many bilder were actually assessed
                 n2 += 1
 
                 # go to next line
@@ -225,7 +225,7 @@ with open("icarusOUTPUT/MetaData.txt", 'a') as logger:
     logger.write("\nICARUS{} running with the following options".format(icarus_version))
     logger.write("\nYOLO-Options: {}".format(options))
     logger.write("\nNumber of Images assessed: {}".format(n2))
-    logger.write("\nAllSeasonRoads detected in {} images, as percentage: {}%".format(found, percentage))
+    logger.write("\nAllSeasonRoads detected in {} bilder, as percentage: {}%".format(found, percentage))
     logger.write("\nErrors occured during assessments: {}".format(err))
     logger.write("\nDuration: [HH:MM:SS.MS] {}".format(stop - start))
     logger.write("\nConfirmation Email sent from {} to: {}\n".format(gmail_account,reciever_accounts))

@@ -28,7 +28,7 @@ def plotDetection():
                 predictions = eval(line[5])
 
                 d = 0
-                #count on how many images detections were made
+                #count on how many bilder detections were made
                 if not day in detects:
                     detects[day] = 1
 

@@ -10,8 +10,8 @@ detect = 0
 start = datetime.now()
 confidence_list = []
 
-# choose validation data here (give folder path, where inside the folder images are saved as .jpg)
-img_folder = "icarusVALIDATION/validationImages/validation/"
+# choose batch26 data here (give folder path, where inside the folder bilder are saved as .jpg)
+img_folder = "icarusVALIDATION/validationImages/batch26/"
 file_list = os.listdir(img_folder)
 
 
@@ -21,9 +21,9 @@ file_list = os.listdir(img_folder)
 options = {"model": "cfg/tiny-yolo-ICARUSv2.cfg", "load": 370950, "threshold": 0.5, 'gpu': 0}
 tfnet = TFNet(options)
 
-print("Running validation of ICARUS...")
+print("Running batch26 of ICARUS...")
 
-#running validation
+#running batch26
 for number in file_list:
     photo_name = str(file_list[t])
     file_path = img_folder + photo_name
@@ -55,14 +55,14 @@ for number in file_list:
 
     t += 1
 
-# perpare validation statistics
+# perpare batch26 statistics
 stop = datetime.now()
 n = len(file_list)
 percentage = round(100*(detect/n), 2)
 avr_confidence = np.mean(confidence_list)
 med_confidence = np.median(confidence_list)
 
-# save validation statistics
+# save batch26 statistics
 with open("icarusVALIDATION/validationStatistics.txt",'a') as logger:
     logger.write("-"*90)
     logger.write("\nNEW RUN at {}\n".format(datetime.now()))

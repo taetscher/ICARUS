@@ -77,3 +77,7 @@ imageClassification/trainingData/images
 imageClassification/trainingData/fullTrainingDataset
 
 imageClassification/ICARUS/darkFLOW_repo/darkflow-master/training/annotations/
+
+imageClassification/ICARUS/darkFLOW_repo/darkflow-master/validation/
+
+imageClassification/ICARUS/darkFLOW_repo/darkflow-master/annotations/

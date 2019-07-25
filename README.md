@@ -40,11 +40,21 @@ ICARUS, as the name so adequatly describes, is an image classification algorithm
 
 EXPLAIN CONNECTION TO SUSTAINABILITY AND METAPHOR OF ICARUS HIMSELF WHO FLEW TOO CLOSE TO THE SUN
 
+EXPLAIN GOALS:
+
+- Show potential of big data sources for geographers working in sustainability
+
 
 ICARUS is part of a masters thesis at the Institute of Geography of the
 University of Bern (Switzerland). 
 
-ICARUS is currently a work in progress.
+Please keep in mind: 
+
+**ICARUS is pretty bad at detecting roads. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student. 
+Basically my hardware could not handle more than tiny-yolo, which as a reference [scores a mAP of 0.237 (or 23.7%)](https://pjreddie.com/darknet/yolo/) on the COCO dataset.**
+
+**ICARUSv2 has a mAP of 0.051 (5.1%). This value was calculated with the incredibly useful tool from fellow github user Cartucho: [mAP](https://github.com/Cartucho/mAP)**
+
 
 ## ICARUS SETUP
 ### Requirements & Setup
@@ -137,8 +147,8 @@ but not necessarily always as the most accurate image classifier.
 
 - I started this project as a complete novice in both the field of programming as well as image classification and machine learning.
 
-Enough with the excuses, though. Let's also highlight a few of the more benefitial insights this project could provide me with.
-There are a number of interesting points that were raised with the implementation of ICARUS.
+Enough with the excuses, though. Let's also highlight a few of the more benefitial insights this project could provide.
+There are a number of interesting points that are touched on with the implementation of ICARUS.
 
 - Big Data for Sustainability (Potentials and Shortcomings)
 
@@ -214,6 +224,8 @@ Most notably inspiration came from...
    
    ...the ingenious [Mark Jay's YOLO Series](https://github.com/markjay4k/YOLO-series),
    
+   ... [Cartucho's fabulous mAP calculator](https://github.com/Cartucho/mAP),
+   
    ...as well as [the official YOLO Webpage](https://pjreddie.com/darknet/yolo/).
 
 
@@ -222,4 +234,4 @@ Most notably inspiration came from...
 
 ## THANKS
 Special thanks go to everyone who helped me along the way. In particular to my mentors who helped
-me achieve my ambitious goals. Furthermore I owe a very special thank you to Melanie.
+me achieve my ambitious goals, most notably PD Dr. Andreas Heinimann. Furthermore I owe a very special thank you to Melanie.

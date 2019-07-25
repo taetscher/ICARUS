@@ -106,7 +106,7 @@ while i_stop < i:
 
         # Create a results object
         results = streetview.results(params)
-        # Download images to directory 'downloads'
+        # Download bilder to directory 'downloads'
         results.download_links('icarustreetviewOUTPUT/temp')
 
         j_file = open('icarustreetviewOUTPUT/temp/metadata.json').read()

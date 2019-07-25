@@ -89,7 +89,7 @@ class listener(StreamListener):
                     # download the image, save it temporarily to pass it on to yolo
                     img_data = requests.get(medurl).content
                     temp_name = 'temp_img'
-                    with open('images/temp/' + temp_name, 'wb') as handler:
+                    with open('bilder/temp/' + temp_name, 'wb') as handler:
                         # save image data from URL
                         handler.write(img_data)
                         print('ICARUS passing image...')
@@ -101,7 +101,7 @@ class listener(StreamListener):
                         gmt.close()
 
                     # read image data into cv2
-                    imgcv = cv2.imread('images/temp/' + temp_name)
+                    imgcv = cv2.imread('bilder/temp/' + temp_name)
 
                     # predict labels of objects in image
                     result = tfnet.return_predict(imgcv)

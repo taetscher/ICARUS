@@ -39,7 +39,7 @@ def saver(in_file, thresh, checkpt):
                 if len(index_list) > 0:
                     # download image, if this fails, go with next one
                     try:
-                        img = cv2.imread('icarusValidation/validationImages/validation/' + str(img_name))
+                        img = cv2.imread('icarusValidation/validationImages/batch26/' + str(img_name))
 
                         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
@@ -146,11 +146,11 @@ def testingICARUS(ckpt_dir):
         print('---------' * 10)
 
         # pass image to yolo
-        pic_list = os.listdir('icarusVALIDATION/validationImages/validation/')
+        pic_list = os.listdir('icarusVALIDATION/validationImages/batch26/')
         print(pic_list)
 
         for picture in pic_list:
-            imgcv = cv2.imread('icarusVALIDATION/validationImages/validation/' + str(picture))
+            imgcv = cv2.imread('icarusVALIDATION/validationImages/batch26/' + str(picture))
 
             # assess image with yolo
             result = tfnet.return_predict(imgcv)

@@ -13,7 +13,7 @@ in_file = folder_path + infile_name
 
 print(in_file)
 # set up threshold for conficence
-tresh = 0.5
+tresh = 0.9
 
 #Viewer magic
 with open(in_file) as fp:
@@ -51,13 +51,13 @@ with open(in_file) as fp:
                 try:
                     img_data = requests.get(medurl, timeout=2).content
                     temp_name = 'temp_img.jpg'
-                    with open('images/temp_download/' + temp_name, 'wb') as handler:
+                    with open('bilder/temp_download/' + temp_name, 'wb') as handler:
                         # save image data from URL
                         handler.write(img_data)
                         handler.close()
 
                     # pass image to yolo
-                    img = cv2.imread('images/temp_download/' + temp_name)
+                    img = cv2.imread('bilder/temp_download/' + temp_name)
 
                     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 

@@ -47,8 +47,8 @@ if __name__ == '__main__':
     for testing
     """
 
-    folder = 'images'
-    img = [im for im in os.scandir('images') if '000001' in im.name][0]
+    folder = 'bilder'
+    img = [im for im in os.scandir('bilder') if '000001' in im.name][0]
     objects = ['fidget_spinner']
     tl = [(10, 10)]
     br = [(100, 100)]
