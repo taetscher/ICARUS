@@ -55,6 +55,7 @@ Basically my hardware could not handle more than tiny-yolo, which as a reference
 
 **ICARUSv2 has a mAP of 0.051 (5.1%). This value was calculated with the incredibly useful tool from fellow github user Cartucho: [mAP](https://github.com/Cartucho/mAP)**
 
+-> I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study.
 
 ## ICARUS SETUP
 ### Requirements & Setup
