@@ -64,6 +64,7 @@ Here is an example where you can see that it still has a lot to learn (it does n
 
 ![Keep it up ICARUS!](imageClassification/RESULTS/thresh07/57.jpg)
 
+
 \
 **Obviously ICARUS is still pretty bad at detecting roads. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student. 
 Basically my hardware could not handle more than tiny-yolo, which as a reference [scores a mean average precision (mAP) of 0.237 (or 23.7%)](https://pjreddie.com/darknet/yolo/) on the COCO dataset.**
