@@ -50,12 +50,23 @@ University of Bern (Switzerland).
 
 Please keep in mind: 
 
+### ICARUS still kinda sucks...
+
+
 **ICARUS is pretty bad at detecting roads. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student. 
-Basically my hardware could not handle more than tiny-yolo, which as a reference [scores a mAP of 0.237 (or 23.7%)](https://pjreddie.com/darknet/yolo/) on the COCO dataset.**
+Basically my hardware could not handle more than tiny-yolo, which as a reference [scores a mean average precision (mAP) of 0.237 (or 23.7%)](https://pjreddie.com/darknet/yolo/) on the COCO dataset.**
 
 **ICARUSv2 has a mAP of 0.051 (5.1%). This value was calculated with the incredibly useful tool from fellow github user Cartucho: [mAP](https://github.com/Cartucho/mAP)**
 
--> I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study.
+
+So, the bottom line is: ICARUSv2 still kind of sucks.  
+The challenges that remain with implementing a decent version of ICARUS are as follows:
+
+- It would be nice if one could use state-of-the-art algorithms (this for me basically means I need to upgrade my hardware)
+- Along with stronger algorithms, it would be awesome to have an image segmentation feature. One reason the mAP of ICARUSv2 is so low currently, is that 
+drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as for the computer.
+- I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study. Further improvements could surely be achieved if I could work on it full-time.
+
 
 ## ICARUS SETUP
 ### Requirements & Setup
@@ -154,6 +165,7 @@ There are a number of interesting points that are touched on with the implementa
 - Big Data for Sustainability (Potentials and Shortcomings)
 
 - Privacy & Consumer Security (also from a geographical perspective)
+    - potential(s) of deep learning technologies to infringe on privacy of citizens
 
 - Corporate Responsibility (Do global corporations with access to vast amounts of data have a responsibility in helping improve sustainability?)
 

@@ -5,7 +5,7 @@ Authentication\.txt
 
 saveFile\.txt
 
-*.jpg
+
 *.txt
 
 *.json
@@ -81,3 +81,17 @@ imageClassification/ICARUS/darkFLOW_repo/darkflow-master/training/annotations/
 imageClassification/ICARUS/darkFLOW_repo/darkflow-master/validation/
 
 imageClassification/ICARUS/darkFLOW_repo/darkflow-master/annotations/
+
+imageClassification/ICARUS/darkFLOW_repo/darkflow-master/icarusTESTING/
+
+imageClassification/RESULTS/thresh07/
+
+imageClassification/RESULTS/tresh09/
+
+imageClassification/RESULTS/thresh08/
+
+imageClassification/ICARUS/darkFLOW_repo/darkflow-master/training/
+
+imageClassification/ICARUS/darkFLOW_repo/darkflow-master/icarusVALIDATION/
+
+imageClassification/ICARUS/darkFLOW_repo/darkflow-master/bilder/
