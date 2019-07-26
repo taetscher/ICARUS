@@ -101,8 +101,17 @@ There are a number of interesting points that are touched on with the implementa
 
 ## ICARUS SETUP
 ### Requirements & Setup
+This section walks you through the setup needed to run ICARUS.
+While you can run darkflow (yolo) on CPU, it is much more efficient to run it on GPU.
+On a NVIDIA GPU you will need the [NVIDIA CUDA Toolkit](https://developer.nvidia.com/cuda-downloads).
+
 #### Twitter API Access
+To access the twitter API, set up an account with the [twitter developer platform](https://developer.twitter.com/) and follow their instructions.
+
 #### Google Street View API Access
+To use the Google Street View API, set up an account with the [Google developer platform](https://developers.google.com/streetview/?hl=de).
+
+
 #### Training ICARUS
 Here is a list of the currently top performing checkpoints from training. The best performing checkpoint is highlighted in bold.
 Their success is measured as percentage of ASR detections on a validation dataset:
@@ -181,7 +190,7 @@ The moving average loss during training reached about 6 to 8 at 20000 steps...
 ![Loss20000](imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_2.png)
 
 \
-...and around 3 to 4 at 370000 steps.
+...and around 3 to 5 at 370000 steps.
 ![Loss20000](imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_4.png)
 
 
@@ -247,7 +256,7 @@ Neat to see the ISS orbit on a map though lol. I found this out through the Goog
 
 ### PLOTTiBOi
 PLOTTiBoi was written to visualize some of the results of this thesis. It has three modes:
-\
+
 
 - one to plot the total amount of tweets saved per day 
 - one to plot the detections made with ICARUS
@@ -261,6 +270,7 @@ It is important to note, that due to the projection (PlateCarrée, EPSG 32662), 
 The issues with projected coordinate systems and scalebars are well elaborated in a nice article by user _abuckley_ over at https://www.esri.com/arcgis-blog/products/product/mapping/back-to-the-issue-of-scale-bars/.  
 
 ----
+
 
 ##RESULTS
 
