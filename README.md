@@ -273,7 +273,8 @@ The issues with projected coordinate systems and scalebars are well elaborated i
 ----
 
 
-##RESULTS
+RESULTS
+--
 
 Here are the results I got from running ICARUSv2 on tweets from May 12 to June 12 2019.
 First, here is a map of all the tweets that were analysed:
