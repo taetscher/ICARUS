@@ -76,7 +76,7 @@ The challenges that remain with implementing a decent version of ICARUS are as f
 
 - It would be nice if one could use state-of-the-art algorithms (this for me basically means I need to upgrade my hardware)
 - Along with stronger algorithms, it would be awesome to have an image segmentation feature. One reason the mAP of ICARUSv2 is so low currently, is that 
-drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as a computer.
+drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as a computer. This means that even if most parts containing ASR are labeled to some degree, mAP (and aou, for that matter) scores would still be rather low.
 - I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study. Further improvements could surely be achieved if I could work on it full-time
  (My training dataset included 5000 images. I had to lable all of my training images myself, which kind of put a constraint on how many I could do).
 
@@ -191,6 +191,7 @@ explain history (ICARUS & ICARUSv2), how to use and implement
 A sensible threshold value for analysis would seem to be upwards of `"thresh" : "0.83"`, as below there are too many false positives.
 
 The checkpoint version of ICARUS which was ultimately used was ckpt#344750.
+
 ### ICARUSaver
 ICARUSaver was designed to save the output of ICARUS as images including prediction bounding boxes with labels. You can provide a custom value for thresh (the yolo threshold).
 This allows you to filter out predictions that do not meet your required confidence values.
@@ -270,7 +271,7 @@ These are the results ICARUSv2 produced...
 
 ## ACKNOWLEDGEMENTS
 
-True to the scientific method, this project would not have been possible without being able to
+True to the scientific method and in the undying words of Isaac Newton, this project would not have been possible without being able to
 'stand on the shoulders of giants'. Many of the components used were already available freely.
 Most notably inspiration came from...
 
@@ -279,7 +280,7 @@ Most notably inspiration came from...
    
    ...the ingenious [Mark Jay's YOLO Series](https://github.com/markjay4k/YOLO-series),
    
-   ... [Cartucho's fabulous mAP calculator](https://github.com/Cartucho/mAP),
+   ...[Cartucho's fabulous mAP calculator](https://github.com/Cartucho/mAP),
    
    ...as well as [the official YOLO Webpage](https://pjreddie.com/darknet/yolo/).
 
