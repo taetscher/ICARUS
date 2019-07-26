@@ -53,21 +53,6 @@ Please keep in mind:
 
 ### ICARUS still kinda sucks...
 
-
-**ICARUS is pretty bad at detecting roads. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student. 
-Basically my hardware could not handle more than tiny-yolo, which as a reference [scores a mean average precision (mAP) of 0.237 (or 23.7%)](https://pjreddie.com/darknet/yolo/) on the COCO dataset.**
-
-**ICARUSv2 has a mAP of 0.051 (5.1%). This value was calculated with the incredibly useful tool from fellow github user Cartucho: [mAP](https://github.com/Cartucho/mAP)**
-
-
-So, the bottom line is: ICARUSv2 still kind of sucks.  
-The challenges that remain with implementing a decent version of ICARUS are as follows:
-
-- It would be nice if one could use state-of-the-art algorithms (this for me basically means I need to upgrade my hardware)
-- Along with stronger algorithms, it would be awesome to have an image segmentation feature. One reason the mAP of ICARUSv2 is so low currently, is that 
-drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as for the computer.
-- I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study. Further improvements could surely be achieved if I could work on it full-time.
-
 \
 Here you can see ICARUSv2 doing what it is supposed to do (kind of _at least_!):
 
@@ -78,6 +63,36 @@ Here you can see ICARUSv2 doing what it is supposed to do (kind of _at least_!):
 Here is an example where you can see that it still has a lot to learn (it does not detect all areas with asphalt road:
 
 ![Keep it up ICARUS!](imageClassification/RESULTS/thresh07/57.jpg)
+
+\
+**Obviously ICARUS is still pretty bad at detecting roads. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student. 
+Basically my hardware could not handle more than tiny-yolo, which as a reference [scores a mean average precision (mAP) of 0.237 (or 23.7%)](https://pjreddie.com/darknet/yolo/) on the COCO dataset.**
+
+**ICARUSv2 has a mAP of 0.051 (5.1%). This value was calculated with the incredibly useful tool from fellow github user Cartucho: [mAP](https://github.com/Cartucho/mAP)**
+
+
+So, the bottom line is: ICARUSv2 still kind of sucks.  
+The challenges that remain with implementing a decent version of ICARUS are as follows:
+
+- It would be nice if one could use state-of-the-art algorithms (this for me basically means I need to upgrade my hardware)
+- Along with stronger algorithms, it would be awesome to have an image segmentation feature. One reason the mAP of ICARUSv2 is so low currently, is that 
+drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as a computer.
+- I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study. Further improvements could surely be achieved if I could work on it full-time
+ (My training dataset included 5000 images. I had to lable all of my training images myself, which kind of put a constraint on how many I could do).
+
+- I started this project as a complete novice in both the field of programming as well as image classification and machine learning.
+
+\
+Enough with the excuses, though. Let's also highlight a few of the more benefitial insights this project could provide.
+There are a number of interesting points that are touched on with the implementation of ICARUS.
+
+- Big Data for Sustainability (Potentials and Shortcomings)
+
+- Privacy & Consumer Security (also from a geographical perspective)
+    - potential(s) of deep learning technologies to infringe on privacy of citizens
+
+- Corporate Responsibility (Do global corporations with access to vast amounts of data have a responsibility in helping improve sustainability?)
+
 
 
 
@@ -164,34 +179,9 @@ If you want to use some version of ICARUS yourself, leave me a message here on G
 
 
 ## HOW TO ICARUS
-ICARUS is based on tiny-yolo-voc, which is cause of a few undesirable effects:
+ICARUS is based on tiny-yolo-voc, and was developed with darkflow:
 
-- the performance of the algorithm is not optimal
 
-- it does not use current, state-of-the-art technology
-
-This is largely due to the following reasons:
-
-- At the time I developed ICARUS, I was a student at the University of Bern, Switzerland.
-Students don't usually have a gaming rig outfitted with 50 GTX TitanX graphics cards. My setup included a GTX 760 (2Gb of VRAM), which could only handle the 
-smallest of workloads.
-
-- I decided to use some version of yolo, for its [fast detection speeds](https://pjreddie.com/darknet/yolo/) of up to 30 FPS. The drawback of this is a potential sacrifice of accuracy. Yolo is known to be lightning quick, 
-but not necessarily always as the most accurate image classifier.
-
-- My training dataset included 5000 images. I had to lable all of my training images myself, which kind of put a constraint on how many I could do.
-
-- I started this project as a complete novice in both the field of programming as well as image classification and machine learning.
-
-Enough with the excuses, though. Let's also highlight a few of the more benefitial insights this project could provide.
-There are a number of interesting points that are touched on with the implementation of ICARUS.
-
-- Big Data for Sustainability (Potentials and Shortcomings)
-
-- Privacy & Consumer Security (also from a geographical perspective)
-    - potential(s) of deep learning technologies to infringe on privacy of citizens
-
-- Corporate Responsibility (Do global corporations with access to vast amounts of data have a responsibility in helping improve sustainability?)
 
 
 ### ICARUS
@@ -257,7 +247,7 @@ The issues with projected coordinate systems and scalebars are well elaborated i
 
 ##RESULTS
 
-Here are the results I got from running ICARUSv2 on Tweets from May 12 to June 12 2019.
+Here are the results I got from running ICARUSv2 on tweets from May 12 to June 12 2019.
 First, here is a map of all the tweets that were analysed:
 
 ![harvests](imageClassification/RESULTS/mapping/map_harvests.png)
