@@ -2,6 +2,7 @@
 
 # :bird: :sunny: ICARUS  
 
+![Example of ICARUSV2 at work!](imageClassification/RESULTS/illustration/371.jpg)
 
 
 This project is mentored by
@@ -9,8 +10,8 @@ This project is mentored by
 
 
 + [_PD Dr. Andreas Heinimann_](http://www.geography.unibe.ch/ueber_uns/personen/pd_dr_heinimann_andreas/index_ger.html)  
-   from the Institute of Geography / Centre for Development and Environment of  
-   the University of Bern  
+   from the Institute of Geography / Centre for Development   
+   and Environment of the University of Bern  
 
 
 Also thank you to
@@ -42,7 +43,7 @@ EXPLAIN CONNECTION TO SUSTAINABILITY AND METAPHOR OF ICARUS HIMSELF WHO FLEW TOO
 
 EXPLAIN GOALS:
 
-- Show potential of big data sources for geographers working in sustainability
+- Show potential of big data sources for geographers working in sustainability using the example of Indicator XY of the Agenda 2030 target indicator XYZ, % of rural population with access to all season roads (ASR) within a 2km distance.
 
 
 ICARUS is part of a masters thesis at the Institute of Geography of the
@@ -67,6 +68,18 @@ The challenges that remain with implementing a decent version of ICARUS are as f
 drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as for the computer.
 - I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study. Further improvements could surely be achieved if I could work on it full-time.
 
+\
+Here you can see ICARUSv2 doing what it is supposed to do (kind of _at least_!):
+
+![Good job ICARUS!](imageClassification/RESULTS/illustration/86.jpg)
+
+
+\
+Here is an example where you can see that it still has a lot to learn (it does not detect all areas with asphalt road:
+
+![Keep it up ICARUS!](imageClassification/RESULTS/thresh07/57.jpg)
+
+
 
 ## ICARUS SETUP
 ### Requirements & Setup
@@ -78,29 +91,40 @@ Their success is measured as percentage of ASR detections on a validation datase
 
 ICARUS v2, RMSPROP standard (with tweaks in learning rate whenever loss plateaus were hit)  
 (~~crossed out~~ checkpoints were deleted due to storage space constraints)
+ 
+Chekpoint | % of ASR Detection | Median Confidence
+----------|--------------------|------------------
+20000     |none                |  none
+~~94500~~ |59                  |  0.61
+~~96500~~ |67                  |  0.6
+~~105000~~|72                  |  0.6
+~~108000~~|71                  |  0.61
+~~110000~~|69                  |  0.6
+~~113250~~|69                  |  0.61
+131250    |62                  |  0.62
+133250    |69                  |  0.6
+135500    |68                  |  0.59
+136750    |72                  |  0.59
+187500    |66                  |  0.63
+256000    |66                  |  0.64
+258750    |73                  |  0.61
+321950    |59                  |  0.64
+**344150**|71                  |  0.62
+**344750**|68                 |  0.63
+**357450**|80                  |  0.61
+364350    |65                  |  0.63
+370950    |66                  |  0.63
+ 
+\
+However, these do not actually represent a good measure of how well a chekpoint does. 
+A much better representation is mAP. So I calculated mAP for all the above checkpoints.
+It turned out that checkpoint 344750 had the highest mAP score. From the visualization below you can see that it still has a lot of false positives, though:
+
+![False positives with Checkpoint 344750](imageClassification/RESULTS/mAP/detection-results-info.png)
 
 
-- 20000
-- ~~94500~~ (59%, med. conf: 0.61)
-- ~~96500~~ (64%, med. conf: 0.6)
-- ~~105000~~ (72%, med conf: 0.6)
-- ~~108000~~ (71%, med conf: 0.61)
-- ~~110000~~ (69%, med conf: 0.6)
-- ~~113250~~ (65%, med conf: 0.61)
-- 131250 (62%, med conf: 0.62)
-- 133250 (69%, med conf: 0.6)
-- 135500 (68.5%, med conf: 0.59)
-- 136750 (72.5%, med conf: 0.59)
-- 187500 (66%, med conf: 0.63)
-- 256000 (66%, med conf: 0.64)
-- 258750 (73.5%, med conf: 0.61)
-- 321950 (59.5%, med conf: 0.64)
-- **344150** (71%, med conf: 0.62)
-- 344750 (68.5%, med conf: 0.63)
-- **357450** (80%, med conf: 0.61)
-- 364350 (65.5%, med conf: 0.63)
-- 370950(last checkpoint, 66%, med conf: 0.63) 
 
+\
 ICARUSv2 was trained using the tiny-yolo-voc.cfg file from [pjreddie.com](https://pjreddie.com/darknet/yolo/).
 It was trained using the RMSPROP Optimizer and the following commands:  
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load -1 --batch 10`
@@ -194,8 +218,11 @@ This is what is finally assessed by ICARUS.
 
 ### ICARUSValidation
 ICARUSValidation was used to determine the quality of checkpoint files during training of ICARUS.
-I used it to assess a validation dataset of 200 images that all contained all-season roads. ICARUSViewer saves detailed statistics of each validation
-run to a seperate ouptut file (validationStatistics.txt).
+I initially used it to assess a validation dataset of 200 images that all contained all-season roads. ICARUSViewer saves detailed statistics of each validation
+run to a seperate ouptut file (validationStatistics.txt). Later I turned to the more significant mAP, which can be calculated from the JSON predictions that darkflow can produce.
+
+To get predictions I called:  
+`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --annotation annotations/validation --imgdir bilder/validation --load 344750 --json`
 
 ### ICARUSViewer
 ICARUSViewer works just like ICARUSaver. But instead of saving output files, they are directly displayed on screen. This functionality can be useful if you just want to
@@ -208,6 +235,8 @@ ICARUSTest was used to visualize the performance of different checkpoints on the
 I had to write a quick program using the [_where the ISS at?_ API](https://wheretheiss.at/w/developer) to track the flight path of
 the International Space Station (ISS). It turns out the ISS has its own twitter account - and I believed it showed in my data.
 So I deployed the ISS tracker to the Raspberry Pi and compared its flight path with the strange tweets coming from the middle of the ocean.
+
+![ISS](imageClassification/RESULTS/mapping/map_harvests_iss.png)
 
 Turns out I was half right: these images came from the [Horizon](https://twitter.com/bitsofpluto) and [DSCOVR](https://twitter.com/dscovr_epic?lang=de) spacecrafts.
 Neat to see the ISS orbit on a map though lol. I found this out through the Google Chrome feature "search Google for this image".
@@ -223,6 +252,29 @@ See [GitHub Page for mappyBoi](https://github.com/taetscher/mappyBoi) for the so
 mappyBoi is used to visualize the input/output data of ICARUS as geographic maps.
 It is important to note, that due to the projection (PlateCarrée, EPSG 32662), I decided againts putting a scale bar on the map.
 The issues with projected coordinate systems and scalebars are well elaborated in a nice article by user _abuckley_ over at https://www.esri.com/arcgis-blog/products/product/mapping/back-to-the-issue-of-scale-bars/.  
+
+----
+
+##RESULTS
+
+Here are the results I got from running ICARUSv2 on Tweets from May 12 to June 12 2019.
+First, here is a map of all the tweets that were analysed:
+
+![harvests](imageClassification/RESULTS/mapping/map_harvests.png)
+
+
+These are the results ICARUSv2 produced...  
+\
+...for a threshold of 0.5:
+![thresh50](imageClassification/RESULTS/mapping/map_ICARUS_thresh50.png)
+
+\
+...for a threshold of 0.8:
+![thresh80](imageClassification/RESULTS/mapping/map_ICARUS_thresh80.png)
+
+\
+...for a threshold of 0.9:
+![thresh90](imageClassification/RESULTS/mapping/map_ICARUS_thresh90.png)
 
 ----
 
