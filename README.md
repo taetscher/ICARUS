@@ -80,7 +80,7 @@ The challenges that remain with implementing a decent version of ICARUS are as f
 
 - It would be nice if one could use state-of-the-art algorithms (this for me basically means I need to upgrade my hardware)
 - Along with stronger algorithms, it would be awesome to have an image segmentation feature. One reason the mAP of ICARUSv2 is so low currently, is that 
-drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as a computer. This means that even if most parts containing ASR are labeled to some degree, mAP (and aou, for that matter) scores would still be rather low.
+drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as a computer. This means that even if most parts containing ASR are labeled to some degree, mAP (and intersect over union (IoU), for that matter) scores would still be rather low.
 - I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study. Further improvements could surely be achieved if I could work on it full-time
  (My training dataset included 5000 images. I had to lable all of my training images myself, which kind of put a constraint on how many I could do).
 
