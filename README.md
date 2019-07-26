@@ -62,7 +62,7 @@ Here you can see ICARUSv2 doing what it is supposed to do (kind of _at least_!):
 \
 Here is an example where you can see that it still has a lot to learn (it does not detect all areas with asphalt road:
 
-![Keep it up ICARUS!](imageClassification/RESULTS/thresh07/57.jpg)
+![Keep it up ICARUS!](imageClassification/RESULTS/illustration/57.jpg)
 
 
 \
