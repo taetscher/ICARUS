@@ -71,6 +71,9 @@ Basically my hardware could not handle more than tiny-yolo, which as a reference
 **ICARUSv2 has a mAP of 0.051 (5.1%). This value was calculated with the incredibly useful tool from fellow github user Cartucho: [mAP](https://github.com/Cartucho/mAP)**
 
 
+
+
+
 So, the bottom line is: ICARUSv2 still kind of sucks.  
 The challenges that remain with implementing a decent version of ICARUS are as follows:
 
@@ -170,7 +173,16 @@ A _second_ version of ICARUS**v2** was trained, using the ADAM Optimizer
             logger.write("{}, {}, {}{}".format(step_now, loss, loss_mva, "\n"))
             logger.close()
             
- This now writes a csv file in the root directory of `/darkflow`.
+This now writes a csv file in the root directory of `/darkflow`.
+
+\
+The moving average loss during training reached about 6 to 8 at 20000 steps...
+
+![Loss20000](imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_2.png)
+
+\
+...and around 3 to 4 at 370000 steps.
+![Loss20000](imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_4.png)
 
 
 If you want to use some version of ICARUS yourself, leave me a message here on GitHub and ask me to send you a .ckpt file. I will gladly do so.
@@ -234,8 +246,12 @@ Neat to see the ISS orbit on a map though lol. I found this out through the Goog
 
 
 ### PLOTTiBOi
-PLOTTiBoi was written to visualize some of the results of this thesis. It has two modes, one to plot the total amount
-of tweets saved per day and one to plot the detections made with ICARUS.
+PLOTTiBoi was written to visualize some of the results of this thesis. It has three modes:
+\
+
+- one to plot the total amount of tweets saved per day 
+- one to plot the detections made with ICARUS
+- one to plot the learning progress of ICARUS
 
 
 ### mappyBoi  
