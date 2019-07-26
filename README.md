@@ -37,7 +37,7 @@ ICARUS was implemented by
 
 
 ## ABOUT ICARUS 
-ICARUS, as the name so adequatly describes, is an image classification algorithm that detects all-season Roads in digital images.
+ICARUS, as the name so adequatly describes, is an image classification algorithm that detects all-season Roads (ASR) in digital images.
 
 EXPLAIN CONNECTION TO SUSTAINABILITY AND METAPHOR OF ICARUS HIMSELF WHO FLEW TOO CLOSE TO THE SUN
 
