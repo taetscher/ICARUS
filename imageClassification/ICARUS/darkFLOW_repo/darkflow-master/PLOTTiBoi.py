@@ -7,17 +7,20 @@ import numpy as np
 
 icarus_version = 2
 trainer = "RMSPROP"
-thresh = 0.5
+thresh = 0.8
 data = {}
 detects = {}
 
 colors = {"grey":"#494a4c", "black":"#0c0c0c", "blue":"#000856", "purple":"#8c0289", "pink":"#ef47ff"}
 
 
-def plotDetection():
+def plotDetection(thresh = thresh):
     """Plots Detections made with ICARUS"""
 
-    with open("icarusOUTPUT/ICARUS{}/output.csv".format(icarus_version)) as s_file:
+    data = {}
+    detects = {}
+
+    with open("icarusOUTPUT/ICARUS{}/output_12_12.csv".format(icarus_version)) as s_file:
 
         while True:
             try:
@@ -32,21 +35,18 @@ def plotDetection():
                 if not day in detects:
                     detects[day] = 1
 
-                if any(predictions) > thresh:
+                else:
                     detects[day] += 1
 
                 #count how many predictions in total
-                for prediction in predictions:
-                    prediction = predictions[d]['confidence']
-                    if prediction > thresh:
-                        # if the day is not already in the list,
-                        if not day in data:
-                            data[day] = 1
-                            d += 1
+                if any(prediction['confidence'] > thresh for prediction in predictions):
+                    # if the day is not already in the list,
+                    if not day in data:
+                        data[day] = 1
 
-                        else:
-                            data[day] += 1
-                            d += 1
+                    else:
+                        data[day] += 1
+
 
             except IndexError:
                 break
@@ -63,16 +63,24 @@ def plotDetection():
 
     # plotting stuff now
     fig, ax = plt.subplots(figsize=(10,4), dpi=150)
-    plt.plot(data.keys(), data.values(), color=colors["black"], marker=".", label="Total Predictions")
-    plt.plot(detects.keys(), detects.values(), color=colors["purple"], marker="x", label="Total Images with Detections")
+    plt.plot(data.keys(), data.values(),color=colors["purple"], marker="x" , label="Total Images with Prediction at threshold {}".format(thresh))
+    plt.plot(detects.keys(), detects.values(), color=colors["black"], marker="." , label="Total Images with Detections")
 
     # label the figure
     plt.suptitle("DETECTIONS OF ALL SEASON ROADS WITH ICARUSv{}".format(icarus_version))
-    plt.title("TRESHOLD SET AT {}, RAN MAY 03 - JUNE 05".format(thresh), color=colors["grey"])
-    plt.xlabel("DATE")
+    plt.title("TRESHOLD SET AT {}, RAN MAY 12 - JUNE 12".format(thresh), color=colors["grey"])
+    plt.xlabel("May                                    DATE                                    June", color=colors["black"])
     plt.ylabel("DETECTIONS")
-    ax.set_xticklabels(x)
+    ax.set_xticklabels(x, fontsize=5)
     ax.legend(loc="upper center")
+
+    # annotations
+    plt.annotate(
+        " RasPi down", xy=("2019-05-16", 2000),
+        xytext=("2019-05-16", 500), color=colors["grey"])
+    plt.annotate(
+        " RasPi down", xy=("2019-06-02", 2000),
+        xytext=("2019-06-02", 500), color=colors["grey"])
 
     # customize axes
     ax.spines['top'].set_visible(False)
@@ -83,8 +91,8 @@ def plotDetection():
     ax.tick_params(axis='y', colors=colors["grey"])
 
     #save and show
-    plt.savefig("Plots/detections.png")
-    plt.show()
+    plt.savefig("Plots/detections_thresh{}.png".format(round(thresh*100)))
+    #plt.show()
 
 def plotHarvests():
     """Plots Input data (number of tweets saved)"""
@@ -129,6 +137,7 @@ def plotHarvests():
     for entry in keys:
         date = entry.split("-")[2]
         x.append(date)
+
     y = list(data.values())
     ave = np.average(y)
     average_list = []
@@ -143,10 +152,10 @@ def plotHarvests():
 
     # label the figure
     plt.suptitle("TWEETS WITH GEOTAG AND MEDIA APPENDED\n")
-    plt.title("MAY 03 - JUNE 05 2019", color=colors["grey"])
-    plt.xlabel("DATE", color=colors["black"])
-    plt.ylabel("TWEETS", color=colors["black"])
-    ax.set_xticklabels(x, fontsize=5)
+    plt.title("MAY 12 - JUNE 12 2019", color=colors["grey"])
+    plt.xlabel("May                                    DATE                                    June", color=colors["black"])
+    plt.ylabel("NUMBER OF TWEETS", color=colors["black"])
+    ax.set_xticklabels(x,    fontsize = 5)
 
     #annotations
     plt.annotate(
@@ -155,9 +164,6 @@ def plotHarvests():
     plt.annotate(
         " RasPi down", xy=("2019-06-02", 2000),
         xytext=("2019-06-02", 5000), color=colors["grey"])
-    plt.annotate(
-        " RasPi down", xy=("2019-06-12", 2000),
-        xytext=("2019-06-12", 1700), color=colors["grey"])
 
     plt.legend(loc="upper center", fontsize=8)
 
@@ -229,4 +235,8 @@ def plotLearning():
     plt.savefig("Plots/learning.png")
     plt.show()
 
-plotHarvests()
+
+threshololo=[0.6,0.7,0.8,0.85,0.9]
+
+for element in threshololo:
+    plotDetection(thresh=element)

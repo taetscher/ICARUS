@@ -277,12 +277,17 @@ RESULTS
 --
 
 Here are the results I got from running ICARUSv2 on tweets from May 12 to June 12 2019.
-First, here is a map of all the tweets that were analysed:
+
+Over this Period of Time, a total of around 0.5 Million tweets were posted that had a geotag and media appended:
+
+![harvestgraph](imageClassification/RESULTS/Plots/harvests/harvests.png)
+
+Here is a map of all the above tweets:
 
 ![harvests](imageClassification/RESULTS/mapping/map_harvests.png)
 
 
-These are the results ICARUSv2 produced...  
+**These are the results ICARUSv2 produced...**  
 \
 ...for a threshold of 0.5:
 ![thresh50](imageClassification/RESULTS/mapping/map_ICARUS_thresh50.png)
@@ -294,6 +299,17 @@ These are the results ICARUSv2 produced...
 \
 ...for a threshold of 0.9:
 ![thresh90](imageClassification/RESULTS/mapping/map_ICARUS_thresh90.png)
+
+
+For comparison, here's all of the above as a gif:
+
+![output_gif](imageClassification/RESULTS/mapping/ICARUS_output.gif)
+
+
+Here you can see how changing the detection threshold (aka improving the results of ICARUS) changed the number of outputs:
+
+![theshold_v_outputGIF](imageClassification/RESULTS/Plots/detections/threshold_v_ouptut.gif)
+
 
 ----
 
