@@ -234,9 +234,6 @@ ICARUSValidation was used to determine the quality of checkpoint files during tr
 I initially used it to assess a validation dataset of 200 images that all contained all-season roads. ICARUSViewer saves detailed statistics of each validation
 run to a seperate ouptut file (validationStatistics.txt). Later I turned to the more significant mAP, which can be calculated from the JSON predictions that darkflow can produce.
 
-To get predictions I called:  
-`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --annotation annotations/validation --imgdir bilder/validation --load 344750 --json`
-
 ### ICARUSViewer
 ICARUSViewer works just like ICARUSaver. But instead of saving output files, they are directly displayed on screen. This functionality can be useful if you just want to
 quickly check what ICARUS is outputting.
@@ -271,6 +268,25 @@ It is important to note, that due to the projection (PlateCarrée, EPSG 32662), 
 The issues with projected coordinate systems and scalebars are well elaborated in a nice article by user _abuckley_ over at https://www.esri.com/arcgis-blog/products/product/mapping/back-to-the-issue-of-scale-bars/.  
 
 ----
+
+VALIDATION
+--
+As mentioned above, to validate ICARUS I calculated mAP.
+
+I validated ICARUS on a set of 200 images from the initial 5200 images that made up my training set.
+From these, I took 200 for validation purposes aside, manually classified them but did not actually train on them.
+It's my validation subset.
+
+To get predictions I called:  
+`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --annotation annotations/validation --imgdir bilder/validation --load 344750 --json`
+
+In the aforementioned mAP tool one can set the `minoverlap` parameter. This is defined in the [PASCAL Challenge](http://host.robots.ox.ac.uk/pascal/VOC/pubs/everingham10.pdf) as follows:
+
+`To be considered a correct detection, the overlap ratio ao between the predicted bounding
+box Bp and ground truth bounding box Bgt must exceed 0.5`
+
+Given the nature of roads, this means that calculating mAP with `minoverlap` of 0.5 but with a rectangular bounding box is not in every case fair to the algorithm. This is why I decided to do mAP calculations with both `minoverlap` of 0.5 as well as 0.3.
+
 
 
 RESULTS
