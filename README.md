@@ -307,7 +307,6 @@ For a better understanding, it is paramount to also look at the density the abov
 ![harvest_density](imageClassification/RESULTS/mapping/Densities/map_harvests_density.png)
 
 
-
 **These are the results ICARUSv2 produced...**  
 \
 ...for a threshold of 0.5:
