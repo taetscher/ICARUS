@@ -212,7 +212,7 @@ explain history (ICARUS & ICARUSv2), how to use and implement
 
 A sensible threshold value for analysis would seem to be upwards of `"thresh" : "0.83"`, as below there are too many false positives.
 
-The checkpoint version of ICARUS which was ultimately used was ckpt#357450.
+The checkpoint version of ICARUS which was ultimately used was ckpt#344750.
 
 ### ICARUSaver
 ICARUSaver was designed to save the output of ICARUS as images including prediction bounding boxes with labels. You can provide a custom value for thresh (the yolo threshold).
