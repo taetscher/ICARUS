@@ -202,8 +202,6 @@ ICARUS is based on tiny-yolo-voc, and was developed with darkflow:
 
 ### ICARUS
 
-explain history (ICARUS & ICARUSv2), how to use and implement
-
 A sensible threshold value for analysis would seem to be upwards of `"thresh" : "0.83"`, as below there are too many false positives.
 
 The checkpoint version of ICARUS which was ultimately used was ckpt#344750.
