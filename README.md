@@ -39,11 +39,7 @@ ICARUS was implemented by
 ## ABOUT ICARUS 
 ICARUS, as the name so adequatly describes, is an image classification algorithm that detects all-season Roads (ASR) in digital images.
 
-EXPLAIN CONNECTION TO SUSTAINABILITY AND METAPHOR OF ICARUS HIMSELF WHO FLEW TOO CLOSE TO THE SUN
-
-EXPLAIN GOALS:
-
-- Show potential of big data sources for geographers working in sustainability using the example of Indicator XY of the Agenda 2030 target indicator XYZ, % of rural population with access to all season roads (ASR) within a 2km distance.
+Information about the accessibility of rural areas is part of the Rural Access Index (RAI), which is a target indicator of the SDGs (Indicator 9.1.1). RAI is in part calculated using information about roads which people can drive on all year round. Methods of generating such data are currently lacking fast and broad coverage. This project was created to help take a step in the direction of using big data to explore possibilities for faster, more broad coverage in monitoring the SDGs.
 
 
 ICARUS is part of a masters thesis at the Institute of Geography of the
@@ -51,7 +47,7 @@ University of Bern (Switzerland).
 
 Please keep in mind: 
 
-### ICARUS still kinda sucks...
+### ICARUS sometimes kinda sucks...
 
 \
 Here you can see ICARUSv2 doing what it is supposed to do (kind of _at least_!):
@@ -66,7 +62,7 @@ Here is an example where you can see that it still has a lot to learn (it does n
 
 
 \
-**Obviously ICARUS is still pretty bad at detecting roads. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student. 
+**Obviously ICARUS is still pretty bad at detecting all of the road sections in an image. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student. 
 Basically my hardware could not handle more than tiny-yolo, which as a reference [scores a mean average precision (mAP) of 0.237 (or 23.7%)](https://pjreddie.com/darknet/yolo/) on the COCO dataset.**
 
 **ICARUSv2 has a mAP of 0.051 (5.1%). This value was calculated with the incredibly useful tool from fellow github user Cartucho: [mAP](https://github.com/Cartucho/mAP)**
@@ -79,10 +75,10 @@ So, the bottom line is: ICARUSv2 still kind of sucks.
 The challenges that remain with implementing a decent version of ICARUS are as follows:
 
 - It would be nice if one could use state-of-the-art algorithms (this for me basically means I need to upgrade my hardware)
-- Along with stronger algorithms, it would be awesome to have an image segmentation feature. One reason the mAP of ICARUSv2 is so low currently, is that 
-drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as a computer. This means that even if most parts containing ASR are labeled to some degree, mAP (and intersect over union (IoU), for that matter) scores would still be rather low.
+- One reason the mAP of ICARUSv2 is so low currently, is that 
+drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as a computer. This means that even if most parts containing ASR are labeled to some degree, mAP scores would still be rather low.
 - I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study. Further improvements could surely be achieved if I could work on it full-time
- (My training dataset included 5000 images. I had to lable all of my training images myself, which kind of put a constraint on how many I could do).
+ (My training dataset included 5000 images. I had to lable all of my training images myself, which put a constraint on how many I could do).
 
 - I started this project as a complete novice in both the field of programming as well as image classification and machine learning.
 
@@ -144,8 +140,6 @@ Chekpoint | % of ASR Detection | Median Confidence
 370950    |66                  |  0.63
  
 \
-However, these do not actually represent a good measure of how well a chekpoint does. 
-A much better representation is mAP. So I calculated mAP for all the above checkpoints.
 It turned out that checkpoint 344750 had the highest mAP score. From the visualization below you can see that it still has a lot of false positives, though:
 
 ![False positives with Checkpoint 344750](imageClassification/RESULTS/mAP/detection-results-info.png)
