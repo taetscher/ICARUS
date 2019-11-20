@@ -1,4 +1,6 @@
-﻿**I**mage **C**lassification **A**pplication for **R**oad **U**tility **S**tatus  
+If, you are not looking at this website over on [its own GitHub Pages page](https://taetscher.github.io/ICARUS/), feel free to switch now.
+
+**I**mage **C**lassification **A**pplication for **R**oad **U**tility **S**tatus  
 
 # :bird: :sunny: ICARUS  
 
@@ -126,7 +128,7 @@ There are a number of interesting points that are touched on with the implementa
 
 
 ## ICARUS SETUP
-### Requirements & Setup
+### Setup
 This section walks you through the setup needed to run ICARUS.
 While you can run darkflow (yolo) on CPU, it is much more efficient to run it on GPU.
 On a NVIDIA GPU you will need the [NVIDIA CUDA Toolkit](https://developer.nvidia.com/cuda-downloads).
@@ -135,7 +137,7 @@ On a NVIDIA GPU you will need the [NVIDIA CUDA Toolkit](https://developer.nvidia
 To access the twitter API, set up an account with the [twitter developer platform](https://developer.twitter.com/) and follow their instructions.
 
 #### Google Street View API Access
-To use the Google Street View API, set up an account with the [Google developer platform](https://developers.google.com/streetview/?hl=de).
+To use the Google Street View API, set up an account with the [Google developer platform](https://developers.google.com/streetview/?hl=de). This is not needed to run ICARUS, i just used Streetview to check the viability of what I did along the way.
 
 
 #### Training ICARUS
@@ -145,7 +147,7 @@ Their success is measured as percentage of ASR detections on a validation datase
 ICARUS v2, RMSPROP standard (with tweaks in learning rate whenever loss plateaus were hit)  
 (~~crossed out~~ checkpoints were deleted due to storage space constraints)
  
-Chekpoint | % of ASR Detection | Median Confidence
+Checkpoint | % of ASR Detection | Median Confidence
 ----------|--------------------|------------------
 20000     |none                |  none
 ~~94500~~ |59                  |  0.61
