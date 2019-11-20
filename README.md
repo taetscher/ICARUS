@@ -2,8 +2,10 @@
 
 # :bird: :sunny: ICARUS  
 
-![Example of ICARUSV2 at work!](imageClassification/RESULTS/illustration/371.jpg)
 
+<p align="center">
+      <img src="imageClassification/RESULTS/illustration/371.jpg">
+</p>
 
 This project is mentored by
 
@@ -51,12 +53,17 @@ Please keep in mind:
 
 Here you can see ICARUSv2 doing what it is supposed to do (kind of _at least_!):
 
-![Good job ICARUS!](imageClassification/RESULTS/illustration/86.jpg)
+<p align="center">
 
+<img src="imageClassification/RESULTS/illustration/86.jpg">
+</p>
 
 Here is an example where you can see that it still has a lot to learn (it does not detect all areas with asphalt road):
 
-![Keep it up ICARUS!](imageClassification/RESULTS/illustration/57.jpg)
+<p align="center">
+
+<img src="imageClassification/RESULTS/illustration/57.jpg">
+</p>
 
 **ICARUS is still pretty bad at detecting all of the road sections in an image. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student (see table below). 
 Basically my hardware could not handle more than tiny-yolo, which as a reference [scores a mean average precision (mAP) of 0.237 (or 23.7%)](https://pjreddie.com/darknet/yolo/) on the COCO dataset.**
@@ -179,13 +186,13 @@ So at step 362550 for example, I changed to the following:
 >`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load 362550 --trainer rmsprop --batch 10 --save 3000 --lr 0.00000005`
 
 Then at step 365850 I changed again to:  
-`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.000000008`
+>`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.000000008`
 
 At step 369750:  
-`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.0000000008`
+>`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.0000000008`
 
 A _second_ version of ICARUS**v2** was trained, using the ADAM Optimizer  
-`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer adam --load -1`
+>`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset  training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer adam --load -1`
 
 
 **To log the values for training , I changed flow.py in** `/darkflow/net` **as follows:**  
@@ -199,12 +206,19 @@ This now writes a csv file in the root directory of `/darkflow`.
 
 The moving average loss during training reached about 6 to 8 at 20000 steps...
 
-![Loss20000](imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_2.png)
+<p align="center">
 
+<img src="imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_2.png">
+
+</p>
 
 ...and around 3 to 5 at 370000 steps.
-![Loss20000](imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_4.png)
 
+<p align="center">
+
+<img src="imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_4.png">
+
+</p>
 
 If you want to use some version of ICARUS yourself, leave me a message here on GitHub and ask me to send you a .ckpt file. I will gladly do so.
 
@@ -255,7 +269,11 @@ I had to write a quick program using the [_where the ISS at?_ API](https://where
 the International Space Station (ISS). It turns out the ISS has its own twitter account - and I believed it showed in my data.
 So I deployed the ISS tracker to the Raspberry Pi and compared its flight path with the strange tweets coming from the middle of the ocean.
 
-![ISS](imageClassification/RESULTS/mapping/map_harvests_iss.png)
+<p align="center">
+
+<img src="imageClassification/RESULTS/mapping/map_harvests_iss.png">
+
+</p>
 
 Turns out I was half right: these images came from the [Horizon](https://twitter.com/bitsofpluto) and [DSCOVR](https://twitter.com/dscovr_epic?lang=de) spacecrafts.
 Neat to see the ISS orbit on a map though lol. I found this out through the Google Chrome feature "search Google for this image".
@@ -287,7 +305,7 @@ From these, I took 200 for validation purposes aside, manually classified them b
 It's my validation subset.
 
 To get predictions I called:  
-`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --annotation annotations/validation --imgdir bilder/validation --load 344750 --json`
+>`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --annotation annotations/validation --imgdir bilder/validation --load 344750 --json`
 
 In the aforementioned mAP tool one can set the `minoverlap` parameter. This is defined in the [PASCAL Challenge](http://host.robots.ox.ac.uk/pascal/VOC/pubs/everingham10.pdf) as follows:
 
@@ -305,40 +323,61 @@ Here are the results I got from running ICARUSv2 on tweets from May 12 to June 1
 
 Over this Period of Time, a total of around 0.5 Million tweets were posted that had a geotag and media appended:
 
-![harvestgraph](imageClassification/RESULTS/Plots/harvests/harvests.png)
+<p align="center">
+
+<img src="imageClassification/RESULTS/Plots/harvests/harvests.png">
+</p>
 
 Here is a map of all the above tweets:
 
-![harvests](imageClassification/RESULTS/mapping/map_harvests.png)
+<p align="center">
+
+<img src="imageClassification/RESULTS/mapping/map_harvests.png">
+</p>
 
 For a better understanding, it is paramount to also look at the density the above visualized tweets:
 
-![harvest_density](imageClassification/RESULTS/mapping/Densities/map_harvests_density.png)
+<p align="center">
+
+<img src="imageClassification/RESULTS/mapping/Densities/map_harvests_density.png">
+</p>
 
 
 **These are the results ICARUSv2 produced...**  
 
 ...for a threshold of 0.5:
-![thresh50](imageClassification/RESULTS/mapping/map_ICARUS_thresh50.png)
+
+<p align="center">
+<img src="imageClassification/RESULTS/mapping/map_ICARUS_thresh50.png">
+</p>
 
 
 ...for a threshold of 0.8:
-![thresh80](imageClassification/RESULTS/mapping/map_ICARUS_thresh80.png)
+
+<p align="center">
+<img src="imageClassification/RESULTS/mapping/map_ICARUS_thresh80.png">
+</p>
 
 
 ...for a threshold of 0.9:
-![thresh90](imageClassification/RESULTS/mapping/map_ICARUS_thresh90.png)
 
+<p align="center">
+<img src="imageClassification/RESULTS/mapping/map_ICARUS_thresh90.png">
+</p>
 
 For comparison, here's all of the above as a gif:
 
-![output_gif](imageClassification/RESULTS/mapping/ICARUS_output.gif)
 
+<p align="center">
+<img src="imageClassification/RESULTS/mapping/ICARUS_output.gif">
+</p>
 
 Here you can see how changing the detection threshold (aka improving the results of ICARUS) changed the number of outputs:
 
-![theshold_v_outputGIF](imageClassification/RESULTS/Plots/detections/threshold_v_ouptut.gif)
 
+<p align="center">
+<img src="imageClassification/RESULTS/Plots/detections/threshold_v_ouptut.gif">
+</p>
 
 ----
 
