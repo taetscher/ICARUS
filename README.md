@@ -1,4 +1,4 @@
-If, you are not looking at this website over on [its own GitHub Pages page](https://taetscher.github.io/ICARUS/), feel free to switch now.
+If you are not looking at this website over on [its own GitHub Pages page](https://taetscher.github.io/ICARUS/), feel free to switch now. 
 
 **I**mage **C**lassification **A**pplication for **R**oad **U**tility **S**tatus  
 
