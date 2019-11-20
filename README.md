@@ -47,25 +47,47 @@ University of Bern (Switzerland).
 
 Please keep in mind: 
 
-### ICARUS sometimes kinda sucks...
+### ICARUS still has a lot of potential for improvement...
 
-\
 Here you can see ICARUSv2 doing what it is supposed to do (kind of _at least_!):
 
 ![Good job ICARUS!](imageClassification/RESULTS/illustration/86.jpg)
 
 
-\
 Here is an example where you can see that it still has a lot to learn (it does not detect all areas with asphalt road):
 
 ![Keep it up ICARUS!](imageClassification/RESULTS/illustration/57.jpg)
 
-
-\
-**Obviously ICARUS is still pretty bad at detecting all of the road sections in an image. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student. 
+**ICARUS is still pretty bad at detecting all of the road sections in an image. As explained in more detail below this is in part due to time and hardware constraints resulting from my comparatively very limited budget as a university student (see table below). 
 Basically my hardware could not handle more than tiny-yolo, which as a reference [scores a mean average precision (mAP) of 0.237 (or 23.7%)](https://pjreddie.com/darknet/yolo/) on the COCO dataset.**
 
-**ICARUSv2 has a mAP of 0.051 (5.1%). This value was calculated with the incredibly useful tool from fellow github user Cartucho: [mAP](https://github.com/Cartucho/mAP)**
+<table class="tg">
+  <tr>
+    <th class="tg-c3ow" colspan="2">Hardware Specs of Copmuter used to train ICARUS</th>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Processor</td>
+    <td class="tg-0pky">AMD FX(tm)-6100 @ 3.30 GHz</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">RAM</td>
+    <td class="tg-0pky">8.00 GB</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Graphics Card</td>
+    <td class="tg-0pky">NVIDIA GeForce GTX 760</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">1152 CUDA Cores</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">2.00 GB of GDDR5 VRAM</td>
+  </tr>
+</table>
+
+**ICARUSv2 has a mAP of 0.051 (5.1%) using standard PASCAL Challenge IoU = 0.5. At IoU = 0.3 the mAP improves to around 0.14 (14%). These values were calculated with the incredibly useful tool from fellow github user Cartucho: [mAP](https://github.com/Cartucho/mAP)**
 
 
 
@@ -74,15 +96,15 @@ Basically my hardware could not handle more than tiny-yolo, which as a reference
 So, the bottom line is: ICARUSv2 still kind of sucks.  
 The challenges that remain with implementing a decent version of ICARUS are as follows:
 
-- It would be nice if one could use state-of-the-art algorithms (this for me basically means I need to upgrade my hardware)
+- It would be nice if one could use state-of-the-art neural nets (this for me basically means I need to upgrade my hardware)
 - One reason the mAP of ICARUSv2 is so low currently, is that 
-drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as a computer. This means that even if most parts containing ASR are labeled to some degree, mAP scores would still be rather low.
+drawing rectangular bounding boxes over weirdly shaped bits of asphalt road is tricky - for humans as well as a computer. This means that even if most parts containing ASR are labeled to some degree, mAP scores would still be rather low. Alleviating this would likely mean finding a way to label amorphous shapes for training.
 - I had a limited time to train ICARUS as well, on bad hardware this leads to questionable results in the machine learning department of the study. Further improvements could surely be achieved if I could work on it full-time
  (My training dataset included 5000 images. I had to lable all of my training images myself, which put a constraint on how many I could do).
-
+ 
 - I started this project as a complete novice in both the field of programming as well as image classification and machine learning.
 
-\
+
 Enough with the excuses, though. Let's also highlight a few of the more benefitial insights this project could provide.
 There are a number of interesting points that are touched on with the implementation of ICARUS.
 
@@ -139,17 +161,12 @@ Chekpoint | % of ASR Detection | Median Confidence
 364350    |65                  |  0.63
 370950    |66                  |  0.63
  
-\
-It turned out that checkpoint 344750 had the highest mAP score. From the visualization below you can see that it still has a lot of false positives, though:
 
-![False positives with Checkpoint 344750](imageClassification/RESULTS/mAP/detection-results-info.png)
+It turned out that checkpoint 344750 had the highest mAP score. It still had quite a lot of false positives, though.
 
-
-
-\
 ICARUSv2 was trained using the tiny-yolo-voc.cfg file from [pjreddie.com](https://pjreddie.com/darknet/yolo/).
 It was trained using the RMSPROP Optimizer and the following commands:  
-`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load -1 --batch 10`
+>`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load -1 --batch 10`
 
 At first I trained it with a batch size of 8 and 4 subdivisions. After stagnating in training I moved to batch size of 8 and 0 subdivisions.
 In the third stage I moved batch size up to 10, which saw ICARUS improve a lot. When training stagnates, it sometimes is helpful to increase batch size incrementally.
@@ -159,7 +176,7 @@ Whenever a plateau of moving ave loss was hit or whenever random "nan" values wo
 continue training this way.
 
 So at step 362550 for example, I changed to the following:  
-`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load 362550 --trainer rmsprop --batch 10 --save 3000 --lr 0.00000005`
+>`python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --gpu 0.77 --load 362550 --trainer rmsprop --batch 10 --save 3000 --lr 0.00000005`
 
 Then at step 365850 I changed again to:  
 `python flow --model cfg/tiny-yolo-ICARUSv2.cfg --train --annotation training/annotations --dataset training/fullTrainingDataset/0_allTrainingBatches --batch 10 --gpu 0.77 --save 3000 --trainer rmsprop --load -1 --lr 0.000000008`
@@ -179,12 +196,12 @@ A _second_ version of ICARUS**v2** was trained, using the ADAM Optimizer
             
 This now writes a csv file in the root directory of `/darkflow`.
 
-\
+
 The moving average loss during training reached about 6 to 8 at 20000 steps...
 
 ![Loss20000](imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_2.png)
 
-\
+
 ...and around 3 to 5 at 370000 steps.
 ![Loss20000](imageClassification/ICARUS/darkFLOW_repo/darkflow-master/Plots/fertige_Plots/learning/I2_RMS/I2_RMSPROP_4.png)
 
@@ -300,15 +317,15 @@ For a better understanding, it is paramount to also look at the density the abov
 
 
 **These are the results ICARUSv2 produced...**  
-\
+
 ...for a threshold of 0.5:
 ![thresh50](imageClassification/RESULTS/mapping/map_ICARUS_thresh50.png)
 
-\
+
 ...for a threshold of 0.8:
 ![thresh80](imageClassification/RESULTS/mapping/map_ICARUS_thresh80.png)
 
-\
+
 ...for a threshold of 0.9:
 ![thresh90](imageClassification/RESULTS/mapping/map_ICARUS_thresh90.png)
 
