@@ -130,42 +130,50 @@ def plotHarvests():
 
             infile.close()
 
-    print(months)
 
     keys = data.keys()
+
+
     x = []
     for entry in keys:
-        date = entry.split("-")[2]
+        date = entry
         x.append(date)
 
     y = list(data.values())
     ave = np.average(y)
     average_list = []
 
+    print(ave)
+
     for element in range(len(y)):
         average_list.append(ave)
 
+    #finding labels
+    xticks = []
+
+    for element in x:
+        if int(element.split('-')[2]) == 22:
+            xticks.append(element)
+        else:
+            pass
+
+
     # plotting stuff now
     fig, ax = plt.subplots(figsize=(10,4), dpi=150)
-    plt.plot(keys, y, color=colors["black"], marker=".", label="Tweets streamed by twitter streaming API")
+    plt.plot(keys, y, color=colors["black"], marker=".", label="Tweets streamed by Twitter streaming API")
     plt.plot(keys, average_list, label="Average", color=colors["purple"], alpha=0.8)
 
     # label the figure
     plt.suptitle("TWEETS WITH GEOTAG AND MEDIA APPENDED\n")
-    plt.title("MAY 12 - JUNE 12 2019", color=colors["grey"])
-    plt.xlabel("May                                    DATE                                    June", color=colors["black"])
+    plt.title("MAY 12th - SEPTEMBER 23rd 2019", color=colors["grey"])
+    plt.xlabel("DATE", color=colors["black"])
     plt.ylabel("NUMBER OF TWEETS", color=colors["black"])
-    ax.set_xticklabels(x,    fontsize = 5)
+    ax.set_xticks(xticks)
+    ax.set_xticklabels(['May 20th','June 20th','July 20th','August 20th','September 20th'],    fontsize = 8)
 
-    #annotations
-    plt.annotate(
-        " RasPi down", xy=("2019-05-16",2000),
-        xytext=("2019-05-16", 3000), color=colors["grey"])
-    plt.annotate(
-        " RasPi down", xy=("2019-06-02", 2000),
-        xytext=("2019-06-02", 5000), color=colors["grey"])
 
     plt.legend(loc="upper center", fontsize=8)
+
 
 
     # customize axes
@@ -176,13 +184,14 @@ def plotHarvests():
     ax.tick_params(axis='x', colors=colors["grey"])
     ax.tick_params(axis='y', colors=colors["grey"])
 
-    every_nth = 2
-    for n, label in enumerate(ax.xaxis.get_ticklabels()):
-        if n % every_nth != 0:
-            label.set_visible(False)
+    ###not needed anymore###
+    #every_nth = 2
+    #for n, label in enumerate(ax.xaxis.get_ticklabels()):
+        #if n % every_nth != 0:
+            #label.set_visible(False)
 
     # save and show
-    plt.savefig("Plots/harvests.png")
+    plt.savefig("Plots/harvests_may_september.png")
     plt.show()
 
 def plotLearning():
@@ -236,7 +245,9 @@ def plotLearning():
     plt.show()
 
 
-threshololo=[0.6,0.7,0.8,0.85,0.9]
+#threshololo=[0.6,0.7,0.8,0.85,0.9]
 
-for element in threshololo:
-    plotDetection(thresh=element)
+#for element in threshololo:
+    #plotDetection(thresh=element)
+
+plotHarvests()
