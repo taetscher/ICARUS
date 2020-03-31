@@ -1,5 +1,7 @@
 If you are not looking at this website over on [its own GitHub Pages page](https://taetscher.github.io/ICARUS/), feel free to switch now. 
 
+Also, if you're interested, read my masters thesis [over here](https://github.com/taetscher/MastersThesis/blob/master/BIGGER_IS_BETTER__OR_IS_IT_MastersThesisBS14100564.pdf).
+
 **I**mage **C**lassification **A**pplication for **R**oad **U**tility **S**tatus  
 
 # :bird: :sunny: ICARUS  
